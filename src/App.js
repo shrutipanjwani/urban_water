@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar/Navbar'
+import Searchbar from './components/Searchbar/Searchbar'
+import OurServices_card from './components/OurServices_card/OurServices_card'
+
+
 import Map from "./Map";
 import { Layers, TileLayer, VectorLayer } from "./Layers";
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
@@ -8,6 +13,8 @@ import GeoJSON from 'ol/format/GeoJSON';
 import { fromLonLat, get } from 'ol/proj';
 import { osm, vector } from "./Source";
 import { Controls, FullScreenControl, ZoomControl } from "./Controls";
+import ExploreUrban_card from './components/ExploreUrban_card/ExploreUrban_card';
+import Footer from './components/Footer/Footer';
 
 const App = () => {
     const [center, setCenter] = useState([-94.9065, 38.9884]);
@@ -169,6 +176,13 @@ const geojsonObject2 = {
     
     return (
       <div>
+<Navbar/>
+<Searchbar/>
+<OurServices_card/>
+<ExploreUrban_card/>
+<Footer/>
+
+
         <Map center={fromLonLat(center)} zoom={zoom}>
           <Layers>
             <TileLayer
