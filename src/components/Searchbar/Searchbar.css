@@ -1,117 +1,114 @@
-:root{
-    font-family: 'Heebo','sans-serif';
+:root {
+  font-family: "Heebo", "sans-serif";
 }
- .container {
-    position: relative;
-    text-align: center;
-    color: white;
-  }
-  .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
- .img{
-      object-fit: cover;
-      width: 100%;
-      height: 100vh;
-      z-index: -1;
-      display: flex;
-      flex-direction: column;
-      background-repeat: no-repeat;
-      align-items: center;
-      box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.2);
-      object-fit: contain;
-  } 
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.img {
+  object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
+}
 
 header {
-    background: 
-      linear-gradient(
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.5)
-      ),
-      url(https://urban-water.co.uk/wp-content/uploads/2021/02/Climate-change-adaptation-urban-water-1.jpg);
-    background-size: cover;
-    height: 100vh;
-    width: 100%;
-  }
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(https://urban-water.co.uk/wp-content/uploads/2021/02/Climate-change-adaptation-urban-water-1.jpg);
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
 
-  .title {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-  }
-  h1 {
-    font-family: 'Heebo';
-    margin: 0;
-    font-size: 2.25rem;
-    font-weight: 900;
-    line-height: 1.2;
-    white-space: nowrap;
-    text-align: left;
-    /* text-justify: auto; */
-  }
-  h2 {
-    font-size: 2rem;
-    color:white;
-    margin-top: 5%;
-    text-align: left;
-    padding-top: 5%;
-  }
-  p {
-    /* margin-top:  5%; */
-    font-size: 1.3rem;
-    text-align: left;
-    /* text-justify: auto; */
-  }
-  input:focus{
-    outline: none;
-  }
-  .para{
-    color: white;
-    padding-top: 2%;
-    font-size: 0.9375rem;
-    text-align: left;
-    /* text-justify: auto; */
-  }
+.title {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+h1 {
+  font-family: "Heebo";
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-align: left;
+  /* text-justify: auto; */
+}
+h2 {
+  font-size: 2rem;
+  color: white;
+  margin-top: 5%;
+  text-align: left;
+  padding-top: 5%;
+}
+p {
+  /* margin-top:  5%; */
+  font-size: 1.3rem;
+  text-align: left;
+  /* text-justify: auto; */
+}
+input:focus {
+  outline: none;
+}
+.para {
+  color: white;
+  padding-top: 2%;
+  font-size: 0.9375rem;
+  text-align: left;
+  /* text-justify: auto; */
+}
 
-  main {
-    max-width: 500px;
-    margin: 20px auto;
-  }  
-  .searchCtrlGeocoderInput,.react-autosuggest__input{
-    width: 100%;
-    padding-top: 0px;
-    padding-right: 40px;
-    padding-bottom: 0px;
-    padding-left: 20px;
-    border-radius: 10px;
-    background-position-x: 96%;
-    background-position-y: 50%;
-    background-image: inherit;
-    border:0px solid;
-    border-top-color: rgb(232, 174, 40);
-    background-size: 20px;
-    min-width: min-content;
-    display: block;
-    padding:2px 10px;
-    color: #999;
-  }
-  .react-autosuggest__suggestions-container{
-    background: #fff;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-top: -7px;
-    border-radius: 0 0 10px 10px;
-  }
-  .react-autosuggest__suggestion{
-    text-align: left;
-    color: #3c4043;
-    font-weight: 300;
-    padding: 5px 10px;
-  }
+main {
+  max-width: 500px;
+  margin: 20px auto;
+}
+.searchCtrlGeocoderInput,
+.react-autosuggest__input {
+  width: 100%;
+  padding-top: 0px;
+  padding-right: 40px;
+  padding-bottom: 0px;
+  padding-left: 20px;
+  border-radius: 10px;
+  background-position-x: 96%;
+  background-position-y: 50%;
+  background-image: inherit;
+  border: 0px solid;
+  border-top-color: rgb(232, 174, 40);
+  background-size: 20px;
+  min-width: min-content;
+  display: block;
+  padding: 2px 10px;
+  color: #999;
+}
+.react-autosuggest__suggestions-container {
+  background: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: -7px;
+  border-radius: 0 0 10px 10px;
+}
+.react-autosuggest__suggestion {
+  text-align: left;
+  color: #3c4043;
+  font-weight: 300;
+  padding: 5px 10px;
+}
