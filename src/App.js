@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // import logo from './logo.svg';
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-import Searchbar from "./components/Searchbar/Searchbar";
-import OurServices_card from "./components/OurServices_card/OurServices_card";
-
-
-import ExploreUrban_card from "./components/ExploreUrban_card/ExploreUrban_card";
 import Footer from "./components/Footer/Footer";
 import ResultPage from "./Pages/ResultPage/ResultPage"
+import HomePage from "./Pages/HomePage/HomePage"
+import { root } from "postcss";
 
 const App = () => {
   
@@ -17,12 +14,11 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <Searchbar />
-      <OurServices_card />
-      <ExploreUrban_card />
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route exact path='/result-page' component={ResultPage} />
+      </Switch>
       <Footer />
-      <ResultPage />
-      
     </Router>
   );
 };
