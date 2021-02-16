@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
-
+import Scrollspy from "react-scrollspy";
+import './ResultPage.css';
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
 import GeoJSON from "ol/format/GeoJSON";
 import { fromLonLat, get } from "ol/proj";
@@ -115,50 +116,98 @@ const ResultPage = () => {
   };
   return (
     <Fragment>
-      <Map center={fromLonLat(center)} zoom={zoom}>
-        <Layers>
-          <TileLayer source={osm()} zIndex={0} />
-          {showLayer1 && (
-            <VectorLayer
-              source={vector({
-                features: new GeoJSON().readFeatures(geojsonObject, {
-                  featureProjection: get("EPSG:3857"),
-                }),
-              })}
-              style={styles.MultiPolygon}
-            />
-          )}
-          {showLayer2 && (
-            <VectorLayer
-              source={vector({
-                features: new GeoJSON().readFeatures(geojsonObject2, {
-                  featureProjection: get("EPSG:3857"),
-                }),
-              })}
-              style={styles.MultiPolygon}
-            />
-          )}
-        </Layers>
-        <Controls>
-          <FullScreenControl />
-          <ZoomControl />
-        </Controls>
-      </Map>
-      <div>
-        <input
-          type="checkbox"
-          checked={showLayer1}
-          onChange={(event) => setShowLayer1(event.target.checked)}
-        />{" "}
-        Johnson County
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          checked={showLayer2}
-          onChange={(event) => setShowLayer2(event.target.checked)}
-        />{" "}
-        Wyandotte County
+      <div className="grid lg:grid-cols-6" style={{ marginTop: "120px" }}>
+        <div className="col-span-1 bg-gray-50">
+          <Scrollspy offset={-120}
+            items={[
+              "section-1",
+              "section-2",
+              "section-3",
+              "section-4",
+              "section-5",
+              "section-6",
+              "section-7",
+              "section-8",
+            ]}
+            currentClassName="is-current"
+          >
+            <li>
+              <a href="#section-1">Summary</a>
+            </li>
+            <li>
+              <a href="#section-2">Flood Risk Rivers and Sea</a>
+            </li>
+            <li>
+              <a href="#section-3">Flood Risk Surface Water</a>
+            </li>
+            <li>
+              <a href="#section-4">Flood Risk Reservoirs</a>
+            </li>
+            <li>
+              <a href="#section-5">Historic Flood Map</a>
+            </li>
+            <li>
+              <a href="#section-6">Area Benefiting From Flood Defences</a>
+            </li>
+            <li>
+              <a href="#section-7">Flood Warning Areas</a>
+            </li>
+            <li>
+              <a href="#section-8">Flood Risk Solutions</a>
+            </li>
+          </Scrollspy>
+        </div>
+        <div className="col-span-5">
+          <section id="section-1" className="min-h-screen bg-red-50">
+            <Map center={fromLonLat(center)} zoom={zoom}>
+              <Layers>
+                <TileLayer source={osm()} zIndex={0} />
+                {showLayer1 && (
+                  <VectorLayer
+                    source={vector({
+                      features: new GeoJSON().readFeatures(geojsonObject, {
+                        featureProjection: get("EPSG:3857"),
+                      }),
+                    })}
+                    style={styles.MultiPolygon}
+                  />
+                )}
+                {showLayer2 && (
+                  <VectorLayer
+                    source={vector({
+                      features: new GeoJSON().readFeatures(geojsonObject2, {
+                        featureProjection: get("EPSG:3857"),
+                      }),
+                    })}
+                    style={styles.MultiPolygon}
+                  />
+                )}
+              </Layers>
+              <Controls>
+                <FullScreenControl />
+                <ZoomControl />
+              </Controls>
+            </Map>
+            <div>
+              <input
+                type="checkbox"
+                checked={showLayer1}
+                onChange={(event) => setShowLayer1(event.target.checked)}
+              />{" "}
+              Johnson County
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                checked={showLayer2}
+                onChange={(event) => setShowLayer2(event.target.checked)}
+              />{" "}
+              Wyandotte County
+            </div>
+          </section>
+          <section id="section-2" className="min-h-screen"></section>
+          <section id="section-3" className="min-h-screen bg-red-50"></section>
+        </div>
       </div>
     </Fragment>
   );
