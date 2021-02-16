@@ -1,3 +1,17 @@
-li.is-current{
-    background-color: red;
+.scrollNav{
+    position: fixed;
+}
+.scrollNav li a{
+    background-color: #fff;
+    color: rgb(61, 144, 236);
+    padding: 10px;
+    width: 100%;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    max-width: 240px;
+    transition: all 0.3s ease-in-out;
+}
+.scrollNav li a:hover,.scrollNav li.is-current a{
+    background-color: rgb(207, 229, 255);
 }

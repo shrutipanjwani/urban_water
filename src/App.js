@@ -13,7 +13,7 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <div className="xl:container mx-auto">
+      <div className="lg:container mx-auto">
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/result-page" component={ResultPage} />

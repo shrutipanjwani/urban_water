@@ -116,9 +116,9 @@ const ResultPage = () => {
   };
   return (
     <Fragment>
-      <div className="grid lg:grid-cols-6" style={{ marginTop: "120px" }}>
-        <div className="col-span-1 bg-gray-50">
-          <Scrollspy offset={-120}
+      <div className="grid xl:grid-cols-6 px-8 bg-white" style={{ marginTop: "115px" }}>
+        <div className="col-span-1">
+          <Scrollspy className="scrollNav" offset={-115}
             items={[
               "section-1",
               "section-2",
@@ -158,7 +158,7 @@ const ResultPage = () => {
           </Scrollspy>
         </div>
         <div className="col-span-5">
-          <section id="section-1" className="min-h-screen bg-red-50">
+          <section id="section-1" className="min-h-screen">
             <Map center={fromLonLat(center)} zoom={zoom}>
               <Layers>
                 <TileLayer source={osm()} zIndex={0} />

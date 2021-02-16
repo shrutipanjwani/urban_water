@@ -1,11 +1,11 @@
 :root {
   font-family: "Heebo", "sans-serif";
 }
-.container {
+/* .container {
   position: relative;
   text-align: center;
   color: white;
-}
+} */
 .centered {
   position: absolute;
   top: 50%;
