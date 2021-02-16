@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import "./components/FontawesomeIcons/icon";
+// import { library } from '@fortawesome/fontawesome-svg-core'
+// import { faFacebook } from '@fortawesome/react-fontawesome'
+// import {faPhoneAlt,faTwitter,faRss,faYoutube,faMapMarkerAlt ,faEnvelope, fas } from '@fortawesome/free-brands-svg-icons'
 
+// library.add(fab,fas, faPhoneAlt,faFacebook,faTwitter,faRss,faYoutube,faMapMarkerAlt, faEnvelope)
+
+
+ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // import logo from './logo.svg';
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
@@ -19,7 +26,7 @@ const App = () => {
         <Route exact path='/' component={HomePage} />
         <Route exact path='/result-page-:suggestion' component={ResultPage} />
       </Switch>
-      <Footer />
+      <Footer/>
     </Router>
   );
 };

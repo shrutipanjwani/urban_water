@@ -32,11 +32,12 @@ export class OurServices_card extends Component {
 
     const renderCard = (card, index) => {
       return (
-        <section
-          className="grid px-8 py-2"
+        <section className='card_grid'
+        className= "grid px-8 py-2"
           style={{ margin: "60px 0" }}
           key={card.id}
         >
+        
           <div className="wrapper max-w-xs bg-gray-50 rounded-b-md shadow-lg overflow-hidden">
             <div>
               <img className="div_2_img" src={card.image} alt="montaña" />
@@ -45,7 +46,7 @@ export class OurServices_card extends Component {
               <h3 className=" h3_card text-gray-700 font-semibold text-md">
                 {card.title}
               </h3>
-              <p className="text-sm text-gray-900 leading-sm">{card.text}</p>
+              <p className="text-sm text-gray-400 leading-sm">{card.text}</p>
             </div>
             <button className="w-51 flexDirection-center justify-center py-2 text-white font-semibold transition duration-300 hover:bg-blue-400">
               Learn More
@@ -57,7 +58,7 @@ export class OurServices_card extends Component {
     return (
       <div>
         <h2 className="card_head w-full sm:w-11/12 px-8 sm:mr-auto sm:ml-auto md:px-0">
-          {" "}
+
           Our Services
         </h2>
         <p className="card_p w-full sm:w-11/12 px-8 sm:mr-auto sm:ml-auto md:px-0">
