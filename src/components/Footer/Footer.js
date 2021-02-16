@@ -6,7 +6,7 @@ import React from 'react'
      return (
          <div>
          <div className="Footer">
-          <img src={ logo } className=" foot_img fill-current h-14 mr-2 " stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" clip-rule="evenodd" viewBox="0 0 716 895"/> 
+          <img src={ logo } className=" foot_img fill-current h-14 mr-2 " strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="1.5" clipRule="evenodd" viewBox="0 0 716 895"/> 
  <h1 className='Footer_head'>Creating a better planet</h1>
  <h3>Flood Risk Assessments ready within 48 hrs.</h3>
 

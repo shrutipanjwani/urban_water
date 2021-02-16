@@ -9,11 +9,11 @@ import './Navbar.css';
              <div>
                  <nav className="sticky shadow-md z-50 w-full nav flex flex-wrap items-center justify-between px-4">
    <div className="flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest">
-   <img src={ logo } className="fill-current h-14 mr-2 " stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="1.5" clip-rule="evenodd" viewBox="0 0 716 895"/>
+   <img src={ logo } className="fill-current h-14 mr-2 " strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="1.5" clipRule="evenodd" viewBox="0 0 716 895"/>
    </div>
 
    <input className="menu-btn hidden" type="checkbox" id="menu-btn"/>
-   <label className="menu-icon block cursor-pointer md:hidden px-2 py-4 relative select-none" for="menu-btn">
+   <label className="menu-icon block cursor-pointer md:hidden px-2 py-4 relative select-none" htmlFor="menu-btn">
      <span className="navicon bg-grey-darkest flex items-center relative"></span>
    </label>
 

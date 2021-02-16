@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 // import logo from './logo.svg';
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
@@ -16,7 +17,7 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path='/' component={HomePage} />
-        <Route exact path='/result-page' component={ResultPage} />
+        <Route exact path='/result-page-:suggestion' component={ResultPage} />
       </Switch>
       <Footer />
     </Router>
