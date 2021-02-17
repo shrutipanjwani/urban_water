@@ -1,8 +1,5 @@
-
-nav{
-    padding: 15px;
+nav.sticky{
     background-color: white;
-    position: fixed;
 }
 .sticky{
     position: fixed;
@@ -13,7 +10,6 @@ ul{
     font-weight: 500;
     font-size: 0.9375rem;
     color: rgb(60, 64, 67);
-    font-weight: bold;
 }
 li:hover{
     /* color: #e2e8f0; */

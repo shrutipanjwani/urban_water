@@ -14,13 +14,13 @@
     .Container-class{
         color: black !important;
     }
-    
-    .grid {
+    /* .grid {
+      min-height: 100%;
       display: flex;
       flex-wrap: wrap;
       flex-direction: row;
       justify-content: space-evenly !important;
-    }
+    } */
     button{
       font-family: "Heebo",;
       border-radius: 5px;

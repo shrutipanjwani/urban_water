@@ -1,50 +1,5 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-h1 {
-  font-family: "Heebo",;
-  margin: 0;
-  font-size: 2.25rem;
-  font-weight: 900;
-  line-height: 1.2;
-  white-space: nowrap;
-  text-align: left;
-}
-h2 {
-  font-family: "Heebo",;
-  font-size: 2rem;
-  color: white;
-  margin-top: 5%;
-  text-align: left;
-  padding-top: 5%;
-}
-p {
-  font-family: "Heebo", ;
-  font-size: 1.3rem;
-  text-align: left;
+:root{
+  font-family: 'Heebo','sans-serif';
+  font-size: 1rem;
+  font-weight: 500;
 }

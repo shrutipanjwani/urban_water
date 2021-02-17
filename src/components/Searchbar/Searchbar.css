@@ -1,9 +1,11 @@
-
-.container {
+:root {
+  font-family: "Heebo", "sans-serif";
+}
+/* .container {
   position: relative;
   text-align: center;
   color: white;
-}
+} */
 .centered {
   position: absolute;
   top: 50%;
@@ -37,6 +39,16 @@ header {
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
+}
+h1 {
+  font-family: "Heebo";
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-align: left;
+  /* text-justify: auto; */
 }
 
 input:focus {

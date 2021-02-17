@@ -1,34 +1,39 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Autosuggest from "react-autosuggest";
 import "./Searchbar.css";
 
 
 //  import image from '../components/images/div_1_image.jpg';
-const Searchbar = ({featureSet}) => {
+const Searchbar = () => {
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+    const [featureSet, setFeatureSet] = useState([]);
 
     const escapeRegexCharacters = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+    
+    
+    const getFeatureSet = (value) => {
+        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}&types=address,region,poi,country,district,locality,neighborhood,postcode&country=gb`)
+        .then(response => response.json())
+        .then(data => setFeatureSet(data.features))
+    };
+
     const getSuggestions = (value) => {
-        
+        const sugs = [];
         const escapedValue = escapeRegexCharacters(value.trim().toLowerCase());
 
         if (escapedValue === "") {
-            return [];
+            return sugs;
         }
+
         const inputLength = escapedValue.length;
-        const sugs = []
+        getFeatureSet(escapedValue);
 
-        // const regex = new RegExp("^" + escapedValue, "i");
         featureSet.map(function(feature){
-            if(feature.text.toLowerCase().slice(0, inputLength) === escapedValue) {
-                sugs.push(feature.text)
-            }
+            sugs.push(feature.place_name)
         })
-        // const sugs = featureSet.filter(feature => feature.text.toLowerCase() === value.trim().toLowerCase());
-
-        return inputLength === 0 ? [] : sugs;
+        return sugs;
     };
 
     const getSuggestionValue = (suggestion) => suggestion;
@@ -60,6 +65,7 @@ const Searchbar = ({featureSet}) => {
 
     const onSuggestionsClearRequested = () => {
         setSuggestions([]);
+        setFeatureSet([]);
     };
 
     const inputProps = {
