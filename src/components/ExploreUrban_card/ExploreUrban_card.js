@@ -50,8 +50,7 @@ export class ExploreUrban_card extends Component {
 
     const renderCard = (card, index) => {
       return (
-        <section className="grid px-8 py-2" style={{ margin: "30px 0" }} key={card.id}>
-          <div className= "wrapper max-w-xs bg-gray-50 rounded-b-md shadow-lg  overflow-hidden">
+          <div key={card.id} className= "wrapper bg-gray-50 rounded-b-md shadow-lg  overflow-hidden">
             <div>
               <img className=" card_img " src={card.image} alt="montaña" />
             </div>
@@ -62,7 +61,6 @@ export class ExploreUrban_card extends Component {
               <p className="text-sm text-gray-400 leading-sm">{card.text}</p>
             </div>
           </div>
-        </section>
       );
     };
     return (
@@ -71,7 +69,7 @@ export class ExploreUrban_card extends Component {
 
           Explore Urban flood risk
         </h2>
-        <div className="grid">{cardInfo2.map(renderCard)}</div>
+        <div className="grid grid-cols-3 gap-8 m-12 ">{cardInfo2.map(renderCard)}</div>
       </div>
     );
   }

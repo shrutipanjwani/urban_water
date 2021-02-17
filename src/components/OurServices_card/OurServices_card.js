@@ -32,13 +32,9 @@ export class OurServices_card extends Component {
 
     const renderCard = (card, index) => {
       return (
-        <section className='card_grid'
-        className= "grid px-8 py-2"
-          style={{ margin: "60px 0" }}
-          key={card.id}
-        >
         
-          <div className="wrapper max-w-xs bg-gray-50 rounded-b-md shadow-lg overflow-hidden">
+        
+          <div key={card.id} className="wrapper bg-gray-50 rounded-b-md shadow-lg overflow-hidden">
             <div>
               <img className="div_2_img" src={card.image} alt="montaña" />
             </div>
@@ -52,7 +48,7 @@ export class OurServices_card extends Component {
               Learn More
             </button>
           </div>
-        </section>
+        
       );
     };
     return (
@@ -64,7 +60,7 @@ export class OurServices_card extends Component {
         <p className="card_p w-full sm:w-11/12 px-8 sm:mr-auto sm:ml-auto md:px-0">
           We can help your project from planning approval to construction
         </p>
-        <div className="grid">{cardInfo.map(renderCard)}</div>
+        <div className="grid grid-cols-3 gap-8 m-12">{cardInfo.map(renderCard)}</div>
       </div>
     );
   }

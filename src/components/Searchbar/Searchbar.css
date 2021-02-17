@@ -38,18 +38,9 @@ header {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  text-align: center;
+ 
 }
-h1 {
-  font-family: "Heebo";
-  margin: 0;
-  font-size: 2.25rem;
-  font-weight: 900;
-  line-height: 1.2;
-  white-space: nowrap;
-  text-align: left;
-  /* text-justify: auto; */
-}
+
 
 input:focus {
   outline: none;

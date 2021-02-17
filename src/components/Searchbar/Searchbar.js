@@ -75,10 +75,10 @@ const Searchbar = () => {
     };
     return (
         <header>
-            <div className="title">
-                <h1>Simple and reliable maps</h1>
+            <div className="title space-y-3">
+                <h1 className="text-5xl ">Simple and reliable maps</h1>
                 <p>We are Water Experts committed to your livelihoods</p>
-                <h2>Flood Risk Maps</h2>
+                <h2 className="text-2xl">Flood Risk Maps</h2>
                 <Autosuggest
                 suggestions={suggestions}
                 onSuggestionsFetchRequested={onSuggestionsFetchRequested}
