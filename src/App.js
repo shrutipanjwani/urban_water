@@ -13,12 +13,10 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <div className="lg:container mx-auto">
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/result-page" component={ResultPage} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/result-page" component={ResultPage} />
+      </Switch>
       <Footer />
     </Router>
   );

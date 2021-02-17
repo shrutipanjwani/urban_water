@@ -51,19 +51,7 @@ h1 {
   text-align: left;
   /* text-justify: auto; */
 }
-h2 {
-  font-size: 2rem;
-  color: white;
-  margin-top: 5%;
-  text-align: left;
-  padding-top: 5%;
-}
-p {
-  /* margin-top:  5%; */
-  font-size: 1.3rem;
-  text-align: left;
-  /* text-justify: auto; */
-}
+
 input:focus {
   outline: none;
 }

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import Autosuggest from "react-autosuggest";
-import axios from 'axios';
 import "./Searchbar.css";
 
 
@@ -14,12 +13,10 @@ const Searchbar = () => {
 
     
     
-    const getFeatureSet = async (value) => {
-        const featureSet = await axios.get(
-            `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}&types=address,region,poi,country,district,locality,neighborhood,postcode&country=gb`
-        );
-
-        setFeatureSet(featureSet.data.features);
+    const getFeatureSet = (value) => {
+        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}&types=address,region,poi,country,district,locality,neighborhood,postcode&country=gb`)
+        .then(response => response.json())
+        .then(data => setFeatureSet(data.features))
     };
 
     const getSuggestions = (value) => {
@@ -31,13 +28,11 @@ const Searchbar = () => {
         }
 
         const inputLength = escapedValue.length;
-        if(inputLength > 1) {
-            getFeatureSet(escapedValue);
+        getFeatureSet(escapedValue);
 
-            featureSet.map(function(feature){
-                sugs.push(feature.place_name)
-            })
-        }
+        featureSet.map(function(feature){
+            sugs.push(feature.place_name)
+        })
         return sugs;
     };
 
@@ -70,6 +65,7 @@ const Searchbar = () => {
 
     const onSuggestionsClearRequested = () => {
         setSuggestions([]);
+        setFeatureSet([]);
     };
 
     const inputProps = {
