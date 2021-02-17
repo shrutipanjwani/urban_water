@@ -1,34 +1,44 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Autosuggest from "react-autosuggest";
+import axios from 'axios';
 import "./Searchbar.css";
 
 
 //  import image from '../components/images/div_1_image.jpg';
-const Searchbar = ({featureSet}) => {
+const Searchbar = () => {
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+    const [featureSet, setFeatureSet] = useState([]);
 
     const escapeRegexCharacters = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+    
+    
+    const getFeatureSet = async (value) => {
+        const featureSet = await axios.get(
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}&types=address,region,poi,country,district,locality,neighborhood,postcode&country=gb`
+        );
+
+        setFeatureSet(featureSet.data.features);
+    };
+
     const getSuggestions = (value) => {
-        
+        const sugs = [];
         const escapedValue = escapeRegexCharacters(value.trim().toLowerCase());
 
         if (escapedValue === "") {
-            return [];
+            return sugs;
         }
+
         const inputLength = escapedValue.length;
-        const sugs = []
+        if(inputLength > 1) {
+            getFeatureSet(escapedValue);
 
-        // const regex = new RegExp("^" + escapedValue, "i");
-        featureSet.map(function(feature){
-            if(feature.text.toLowerCase().slice(0, inputLength) === escapedValue) {
-                sugs.push(feature.text)
-            }
-        })
-        // const sugs = featureSet.filter(feature => feature.text.toLowerCase() === value.trim().toLowerCase());
-
-        return inputLength === 0 ? [] : sugs;
+            featureSet.map(function(feature){
+                sugs.push(feature.place_name)
+            })
+        }
+        return sugs;
     };
 
     const getSuggestionValue = (suggestion) => suggestion;
