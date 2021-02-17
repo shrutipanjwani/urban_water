@@ -118,52 +118,59 @@ const ResultPage = () => {
     <Fragment>
       <div className="lg:container mx-auto">
         <div
-          className="grid xl:grid-cols-6 px-8 bg-white"
+          className="grid xl:grid-cols-10 px-8 bg-white"
           style={{ marginTop: "115px" }}
         >
-          <div className="col-span-1">
-            <Scrollspy
-              className="scrollNav"
-              offset={-115}
-              items={[
-                "section-1",
-                "section-2",
-                "section-3",
-                "section-4",
-                "section-5",
-                "section-6",
-                "section-7",
-                "section-8",
-              ]}
-              currentClassName="is-current"
-            >
-              <li>
-                <a href="#section-1">Summary</a>
-              </li>
-              <li>
-                <a href="#section-2">Flood Risk Rivers and Sea</a>
-              </li>
-              <li>
-                <a href="#section-3">Flood Risk Surface Water</a>
-              </li>
-              <li>
-                <a href="#section-4">Flood Risk Reservoirs</a>
-              </li>
-              <li>
-                <a href="#section-5">Historic Flood Map</a>
-              </li>
-              <li>
-                <a href="#section-6">Area Benefiting From Flood Defences</a>
-              </li>
-              <li>
-                <a href="#section-7">Flood Warning Areas</a>
-              </li>
-              <li>
-                <a href="#section-8">Flood Risk Solutions</a>
-              </li>
-            </Scrollspy>
+          <div className="col-span-2 mr-2 relative">
+            <div className="absolute w-full">
+              <div className="fixed">
+                <div className="font-bold text-gray-600 text-xl mb-4 border-b-2 border-gray-200 p-2">
+                  Oxford
+                </div>
+                <Scrollspy
+                  className="scrollNav"
+                  offset={-115}
+                  items={[
+                    "section-1",
+                    "section-2",
+                    "section-3",
+                    "section-4",
+                    "section-5",
+                    "section-6",
+                    "section-7",
+                    "section-8",
+                  ]}
+                  currentClassName="is-current"
+                >
+                  <li>
+                    <a href="#section-1">Summary</a>
+                  </li>
+                  <li>
+                    <a href="#section-2">Flood Risk Rivers and Sea</a>
+                  </li>
+                  <li>
+                    <a href="#section-3">Flood Risk Surface Water</a>
+                  </li>
+                  <li>
+                    <a href="#section-4">Flood Risk Reservoirs</a>
+                  </li>
+                  <li>
+                    <a href="#section-5">Historic Flood Map</a>
+                  </li>
+                  <li>
+                    <a href="#section-6">Area Benefiting From Flood Defences</a>
+                  </li>
+                  <li>
+                    <a href="#section-7">Flood Warning Areas</a>
+                  </li>
+                  <li>
+                    <a href="#section-8">Flood Risk Solutions</a>
+                  </li>
+                </Scrollspy>
+              </div>
+            </div>
           </div>
-          <div className="col-span-5">
+          <div className="col-span-8">
             <section id="section-1" className="min-h-screen">
               <Map center={fromLonLat(center)} zoom={zoom}>
                 <Layers>
@@ -231,13 +238,96 @@ const ResultPage = () => {
                 </p>
                 <strong>Property type at risk of flooding in Oxford</strong>
                 <div className="h-60 border my-4 bg-gray-50">Graph image</div>
+                <p className="py-4 md:w-2/4">
+                  The property type affected by risk in Oxford are mostly
+                  residential.
+                </p>
+                <strong>Property type at risk of flooding in Oxford</strong>
+                <div className="h-60 border my-4 bg-gray-50">Graph image</div>
               </div>
             </section>
-            <section id="section-2" className="min-h-screen"></section>
+            <section
+              id="section-2"
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
+              <div className="py-6 w-2/4 lg:mx-auto">
+                <h2 className="text-3xl font-black">
+                  Flood Risk Rivers and Sea - Planning
+                </h2>
+                <p className="py-4">
+                  This map covers the flood risk from rivers and sea for
+                  planning purposes. This information was produced by the
+                  Environment Agency to support the flood risk assessments that
+                  are part of planning applications. The flood risk varies from
+                  Flood Zone 1 (low risk) to Flood Zone 3 (high risk).
+                  <br />
+                  <br />
+                  Contact us if you would like to get obtain a detailed flood
+                  risk assessment.
+                </p>
+                <div>
+                  <input
+                    type="checkbox"
+                    checked={showLayer1}
+                    onChange={(event) => setShowLayer1(event.target.checked)}
+                  />{" "}
+                  Johnson County
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    checked={showLayer2}
+                    onChange={(event) => setShowLayer2(event.target.checked)}
+                  />{" "}
+                  Wyandotte County
+                </div>
+              </div>
+              <Map center={fromLonLat(center)} zoom={zoom}>
+                <Layers>
+                  <TileLayer source={osm()} zIndex={0} />
+                  {showLayer1 && (
+                    <VectorLayer
+                      source={vector({
+                        features: new GeoJSON().readFeatures(geojsonObject, {
+                          featureProjection: get("EPSG:3857"),
+                        }),
+                      })}
+                      style={styles.MultiPolygon}
+                    />
+                  )}
+                  {showLayer2 && (
+                    <VectorLayer
+                      source={vector({
+                        features: new GeoJSON().readFeatures(geojsonObject2, {
+                          featureProjection: get("EPSG:3857"),
+                        }),
+                      })}
+                      style={styles.MultiPolygon}
+                    />
+                  )}
+                </Layers>
+                <Controls>
+                  <FullScreenControl />
+                  <ZoomControl />
+                </Controls>
+              </Map>
+            </section>
             <section
               id="section-3"
-              className="min-h-screen bg-red-50"
-            ></section>
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
+              <div className="py-6 w-2/4 lg:mx-auto">
+                <h2 className="text-3xl font-black">
+                  Flood Risk Surface Water
+                </h2>
+                <p className="py-4">
+                  The flood risk from surface water is assessed in its extent depth and hazard.
+                  <br />
+                  <br />
+                  Contact us if you would like odtain a detailed flood risk assessment for your site.
+                </p>
+              </div>
+            </section>
           </div>
         </div>
       </div>
