@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 import Scrollspy from "react-scrollspy";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+// import "react-tabs/style/react-tabs.css";
 import "./ResultPage.css";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
 import GeoJSON from "ol/format/GeoJSON";
@@ -321,12 +323,27 @@ const ResultPage = () => {
                   Flood Risk Surface Water
                 </h2>
                 <p className="py-4">
-                  The flood risk from surface water is assessed in its extent depth and hazard.
+                  The flood risk from surface water is assessed in its extent
+                  depth and hazard.
                   <br />
                   <br />
-                  Contact us if you would like odtain a detailed flood risk assessment for your site.
+                  Contact us if you would like odtain a detailed flood risk
+                  assessment for your site.
                 </p>
               </div>
+              <Tabs>
+                <TabList>
+                  <Tab>Title 1</Tab>
+                  <Tab>Title 2</Tab>
+                </TabList>
+
+                <TabPanel>
+                  <h2>Any content 1</h2>
+                </TabPanel>
+                <TabPanel>
+                  <h2>Any content 2</h2>
+                </TabPanel>
+              </Tabs>
             </section>
           </div>
         </div>
