@@ -1,9 +1,13 @@
 import React from 'react'
  import '../Footer/Footer.css'
  import logo from '../../images/Urban_Water_cv.png';
-import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-
-
+import { FaFacebook } from 'react-icons/fa';
+import {FaTwitter} from 'react-icons/fa';
+import {FaYoutube}from 'react-icons/fa';
+import {BiRss} from 'react-icons/bi';
+import{MdCall} from 'react-icons/md';
+import{IoMail} from 'react-icons/io5';
+import{IoLocationSharp} from 'react-icons/io5';
  function Footer() {
      return (
          <div>
@@ -13,10 +17,10 @@ import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
  <h3 className='h3_foot'>Flood Risk Assessments ready within 48 hrs.</h3>
 
      
-     <div class=" grid grid-cols-3 gap-4">
-  <div className='first'>📞 +1 (344) 532-2352 </div>
-  <div className='second'>✉️ info@urban-water.co.uk </div>
-  <div className='third'>📍 List Item #1</div>
+     <div class="grid grid-cols-3 justify-items-stretch">
+  <div className="justify-self-center"> <MdCall/> +1 (344) 532-2352 </div>
+  <div className="justify-self-center"><IoMail/> info@urban-water.co.uk </div>
+  <div className="justify-self-center"><IoLocationSharp/> List Item #1</div>
 </div>
      
                  <button class=" footer_btn bg-white hover:bg-green-100 text-green-400 font-semibold py-2 px-4 border border-green-400 rounded-full shadow">
@@ -24,13 +28,19 @@ import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 </button>
 
          </div>
-         <div className='last'>
-         <p className='foot'>Urban Water © 2021 | All rights reserved.</p>
-
-         <span>
-         <FontAwesomeIcon icon={["facebook"]} />
-         <FontAwesomeIcon icon={["facebook", "twitter","youtube","rss"]}/>
-         </span>
+        
+         <div className='last flex static '>
+         <p className='foot justify-start'>Urban Water © 2021 | All rights reserved.</p>
+         <div className='icons flex justify-end space-x-3 ml-96 mt-1'>
+         <FaFacebook/>
+         <FaTwitter/>
+        <FaYoutube/>
+        <BiRss/>
+         </div>
+         
+         
+        
+         
         
          </div>
          </div>

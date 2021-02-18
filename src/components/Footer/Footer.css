@@ -1,22 +1,21 @@
-:root{
-    font-family: 'Heebo';
-}
+
 .Footer{
     background: rgb(66, 146, 235);
     color: white;
     padding: 3em;
 }
 .foot_img{
-    margin-left: 42%;
+    margin-left: 41%;
 }
 .Footer_head{
-    font-family: 'Heebo';
+    
     text-align: center;
-    margin: 2%;
+    margin: 2% 0 0 0;
 }
 
+
 .footer_btn{
-    margin-left: 44%;
+    margin-left: 43%;
 }
 .last{
     
@@ -31,24 +30,10 @@
     font-size: 1rem !important;
 }
 .h3_foot{
-    font-family: 'Heebo';
+
 text-align: center;
-margin-bottom: 5%;
+margin: 2% 0 5% 0;
 }
-.first{
-    font-family: 'Heebo';
-    left: 0%; 
-    position: relative;
-}
-.second
-{ 
-font-family: 'Heebo';
-left: -1%; 
-position: relative; 
-}
-.third
-{ 
-font-family: 'Heebo';
-left: 0%; 
-position: relative; 
+.icons{
+    margin-left:65%
 }
