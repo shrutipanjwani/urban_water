@@ -11,13 +11,16 @@ h1 {
   white-space: nowrap;
 }
 h2 {
-  font-size: 2rem;
+  /* font-size: 2rem;
   color: white;
   margin-top: 5%;
   text-align: left;
-  padding-top: 5%;
+  padding-top: 5%; */
 }
 p {
-  font-size: 1.3rem;
-  text-align: left;
+  /* font-size: 1.3rem;
+  text-align: left; */
+}
+button:focus, [role="button"]:focus, a:focus{
+  outline: none;
 }

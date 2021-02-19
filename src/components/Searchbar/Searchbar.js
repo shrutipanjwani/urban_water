@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Autosuggest from "react-autosuggest";
+import { useHistory } from "react-router-dom";
 import "./Searchbar.css";
 
 
@@ -8,13 +9,17 @@ const Searchbar = () => {
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const [featureSet, setFeatureSet] = useState([]);
+    const [placeName, setPlaceName] = useState("Oxford");
+    
+    const history = useHistory();
 
     const escapeRegexCharacters = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
     
     
     const getFeatureSet = (value) => {
-        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}&types=address,region,poi,country,district,locality,neighborhood,postcode&country=gb`)
+        // fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}&types=address,region,poi,country,district,locality,neighborhood,postcode&country=gb`)
+        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}&types=region,country,district,neighborhood,postcode&country=gb`)
         .then(response => response.json())
         .then(data => setFeatureSet(data.features))
     };
@@ -31,7 +36,7 @@ const Searchbar = () => {
         getFeatureSet(escapedValue);
 
         featureSet.map(function(feature){
-            sugs.push(feature.place_name)
+            sugs.push(feature.text)
         })
         return sugs;
     };
@@ -42,7 +47,10 @@ const Searchbar = () => {
 
     const onSuggestionSelected = (  event,  { suggestion, suggestionValue, method }) => {
         event.preventDefault();
-        console.log("ping... ", suggestion, suggestionValue, method);
+        // console.log("ping... ", suggestion, method);
+        setPlaceName(suggestion);
+        let locationForUrl = suggestion.replace(/\s+/g, '-');
+        history.push('/explore-towns/flood-risk-map-' + locationForUrl);
     };
 
     const renderInputComponent = (inputProps) => (
@@ -69,7 +77,7 @@ const Searchbar = () => {
     };
 
     const inputProps = {
-        placeholder: "Type 'c'",
+        placeholder: "Type Enter ZIP Code, City, or State",
         value,
         onChange: onChange,
     };

@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import Scrollspy from "react-scrollspy";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
 // import "react-tabs/style/react-tabs.css";
 import "./ResultPage.css";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
@@ -15,12 +15,15 @@ import {
   FullScreenControl,
   ZoomControl,
 } from "../../components/Controls";
+import FloodRiskSurfaceWater from "./pageSections/FloodRiskSurfaceWater";
+import FloodRiskSolutions from "./pageSections/FloodRiskSolutions";
 
 const ResultPage = () => {
   const [center, setCenter] = useState([-94.9065, 38.9884]);
   const [zoom, setZoom] = useState(9);
   const [showLayer1, setShowLayer1] = useState(true);
   const [showLayer2, setShowLayer2] = useState(true);
+  const [placeName, setPlaceName] = useState("Oxford");
 
   let styles = {
     Point: new Style({
@@ -127,7 +130,7 @@ const ResultPage = () => {
             <div className="absolute w-full">
               <div className="fixed">
                 <div className="font-bold text-gray-600 text-xl mb-4 border-b-2 border-gray-200 p-2">
-                  Oxford
+                  Oxford {placeName}
                 </div>
                 <Scrollspy
                   className="scrollNav"
@@ -140,7 +143,6 @@ const ResultPage = () => {
                     "section-5",
                     "section-6",
                     "section-7",
-                    "section-8",
                   ]}
                   currentClassName="is-current"
                 >
@@ -159,14 +161,14 @@ const ResultPage = () => {
                   <li>
                     <a href="#section-5">Historic Flood Map</a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="#section-6">Area Benefiting From Flood Defences</a>
+                  </li> */}
+                  <li>
+                    <a href="#section-6">Flood Warning Areas</a>
                   </li>
                   <li>
-                    <a href="#section-7">Flood Warning Areas</a>
-                  </li>
-                  <li>
-                    <a href="#section-8">Flood Risk Solutions</a>
+                    <a href="#section-7">Flood Risk Solutions</a>
                   </li>
                 </Scrollspy>
               </div>
@@ -174,6 +176,7 @@ const ResultPage = () => {
           </div>
           <div className="col-span-8">
             <section id="section-1" className="min-h-screen">
+              <h2 className="text-3xl font-black mb-4">Flood Map Oxford</h2>
               <Map center={fromLonLat(center)} zoom={zoom}>
                 <Layers>
                   <TileLayer source={osm()} zIndex={0} />
@@ -248,6 +251,7 @@ const ResultPage = () => {
                 <div className="h-60 border my-4 bg-gray-50">Graph image</div>
               </div>
             </section>
+
             <section
               id="section-2"
               className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
@@ -256,7 +260,7 @@ const ResultPage = () => {
                 <h2 className="text-3xl font-black">
                   Flood Risk Rivers and Sea - Planning
                 </h2>
-                <p className="py-4">
+                <p className="py-6">
                   This map covers the flood risk from rivers and sea for
                   planning purposes. This information was produced by the
                   Environment Agency to support the flood risk assessments that
@@ -314,36 +318,73 @@ const ResultPage = () => {
                 </Controls>
               </Map>
             </section>
+
             <section
               id="section-3"
               className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
             >
+              <FloodRiskSurfaceWater />
+            </section>
+
+            <section
+              id="section-4"
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
               <div className="py-6 w-2/4 lg:mx-auto">
-                <h2 className="text-3xl font-black">
-                  Flood Risk Surface Water
-                </h2>
-                <p className="py-4">
-                  The flood risk from surface water is assessed in its extent
-                  depth and hazard.
+                <h2 className="text-3xl font-black">Flood Risk Reservoirs</h2>
+                <p className="py-6">
+                  This shows the maximum extent if a reservoir were fail and
+                  release its water. Ths is the worst case scenario, it's
+                  unlikely that any actual flood would be this big. These data
+                  are intended for emergency planning only.
                   <br />
                   <br />
                   Contact us if you would like odtain a detailed flood risk
                   assessment for your site.
                 </p>
               </div>
-              <Tabs>
-                <TabList>
-                  <Tab>Title 1</Tab>
-                  <Tab>Title 2</Tab>
-                </TabList>
+            </section>
 
-                <TabPanel>
-                  <h2>Any content 1</h2>
-                </TabPanel>
-                <TabPanel>
-                  <h2>Any content 2</h2>
-                </TabPanel>
-              </Tabs>
+            <section
+              id="section-5"
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
+              <div className="py-6 w-2/4 lg:mx-auto">
+                <h2 className="text-3xl font-black">Historic Flood Map</h2>
+                <p className="py-6">
+                  This shows areas of land that have been previously flooded in
+                  England. It is possible that an area has been flooded but has
+                  not been recorded. It is also possible that new area flood or
+                  not flood at the moment. This data does not indicate if a
+                  property has been flooded internally.
+                  <br />
+                  <br />
+                  Contact us if you would like odtain a detailed flood risk
+                  assessment for your site.
+                </p>
+              </div>
+            </section>
+
+            <section
+              id="section-6"
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
+              <div className="py-6 w-2/4 lg:mx-auto">
+                <h2 className="text-3xl font-black">Flood warning areas</h2>
+                <p className="py-6">
+                  This map shows the areas where the Flood Warning Service is
+                  provided by the Environment Agency. We recomend you register
+                  to the service if your property is expected to flood from
+                  fiver or sea.
+                </p>
+              </div>
+            </section>
+
+            <section
+              id="section-7"
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
+              <FloodRiskSolutions />
             </section>
           </div>
         </div>
