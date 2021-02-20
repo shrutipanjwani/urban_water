@@ -17,7 +17,7 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/explore-towns/flood-risk-map-:place" component={ResultPage} />
+          <Route exact path={["/explore-towns/flood-risk-map-:place", "/flood-risk-map"]} component={ResultPage} />
         </Switch>
         <Footer />
       </Router>

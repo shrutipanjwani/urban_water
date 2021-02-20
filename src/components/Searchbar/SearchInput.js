@@ -7,7 +7,7 @@ import "./Searchbar.css";
 
 //  import image from '../components/images/div_1_image.jpg';
 const SearchInput = () => {
-    const {searchValue, setPlace} = useContext(uwContext)
+    const {selectedPlace, setPlace} = useContext(uwContext)
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const [featureSet, setFeatureSet] = useState([]);
@@ -32,7 +32,7 @@ const SearchInput = () => {
             return sugs;
         }
 
-        const inputLength = escapedValue.length;
+        // const inputLength = escapedValue.length;
         getFeatureSet(escapedValue);
 
         featureSet.map(function(feature){
@@ -48,9 +48,16 @@ const SearchInput = () => {
     const onSuggestionSelected = (  event,  { suggestion, suggestionValue, method }) => {
         event.preventDefault();
         let place = suggestion.replace(/\s+/g, '-').toLowerCase()
+
+        const selectedFeature = featureSet.filter(function(feature) {
+            if(feature.text == suggestion) {
+                feature.sanitised = suggestion.replace(/\s+/g, '-').toLowerCase()
+                return feature
+            }
+        })
+
         const result = {
-            place: place,
-            searchValue: suggestion
+            selectedFeature: selectedFeature
         }
         setPlace(result);
         history.push('/explore-towns/flood-risk-map-' + place);
@@ -76,7 +83,7 @@ const SearchInput = () => {
     };
 
     const inputProps = {
-        placeholder: (window.location.pathname != '/' && searchValue) ? searchValue : "Type Enter ZIP Code, City, or State",
+        placeholder: (window.location.pathname != '/' && selectedPlace.text) ? selectedPlace.text : "Type Enter ZIP Code, City, or State",
         value,
         onChange: onChange
     };

@@ -5,8 +5,7 @@ import axios from 'axios'
 
 const UwState = props => {
     const initialState = {
-        placeName: '',
-        searchValue: ''
+        selectedPlace: {}
     }
 
     const [state, dispatch] = useReducer(uwReducer, initialState)
@@ -15,9 +14,8 @@ const UwState = props => {
 
     return <uwContext.Provider
         value={{
-            placeName: state.placeName,
-            searchValue: state.searchValue,
-            setPlace
+            setPlace,
+            selectedPlace: state.selectedPlace
         }}
     >{ props.children }</uwContext.Provider>
 }

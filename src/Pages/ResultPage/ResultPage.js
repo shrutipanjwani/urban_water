@@ -1,16 +1,19 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import Scrollspy from "react-scrollspy";
-import uwContext from '../../context/uw/uwContext';
+import uwContext from "../../context/uw/uwContext";
 
 // import "react-tabs/style/react-tabs.css";
 import "./ResultPage.css";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
 import GeoJSON from "ol/format/GeoJSON";
+import Feature from "ol/Feature";
 import { fromLonLat, get } from "ol/proj";
-
+import Point from "ol/geom/Point";
+import Tile from 'ol/layer/Tile';
 import Map from "../../components/Map";
 import { Layers, TileLayer, VectorLayer } from "../../components/Layers";
-import { osm, vector } from "../../components/Source";
+import { osm, vector, tilewms } from "../../components/Source";
 import {
   Controls,
   FullScreenControl,
@@ -20,18 +23,27 @@ import FloodRiskSurfaceWater from "./pageSections/FloodRiskSurfaceWater";
 import FloodRiskSolutions from "./pageSections/FloodRiskSolutions";
 
 const ResultPage = () => {
-    const {placeName, searchValue} = useContext(uwContext)
+  const { selectedPlace } = useContext(uwContext);
   const [center, setCenter] = useState([-94.9065, 38.9884]);
   const [zoom, setZoom] = useState(9);
   const [showLayer1, setShowLayer1] = useState(true);
   const [showLayer2, setShowLayer2] = useState(true);
-  
+
+  const riverWMS = new Tile({
+    source: new tilewms({
+      url: "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-reservoirs-maximum-flood-extent/wms",
+      params: { LAYERS: "risk-of-flooding-from-reservoirs-maximum-flood-extent", tiled: true },
+    }),
+    name: "Main River",
+  });
 
   let styles = {
     Point: new Style({
       image: new CircleStyle({
         radius: 10,
-        fill: null,
+        fill: new Fill({
+          color: "rgba(255,0,0,0.7)",
+        }),
         stroke: new Stroke({
           color: "magenta",
         }),
@@ -132,7 +144,7 @@ const ResultPage = () => {
             <div className="absolute w-full">
               <div className="fixed">
                 <div className="font-bold text-gray-600 text-xl mb-4 border-b-2 border-gray-200 p-2">
-                  {searchValue}
+                  {selectedPlace.text}
                 </div>
                 <Scrollspy
                   className="scrollNav"
@@ -148,6 +160,7 @@ const ResultPage = () => {
                   ]}
                   currentClassName="is-current"
                 >
+                  {/* { location.pathname.match('/flood-risk-map') ? '' : <li><a href="#section-1">Summary</a></li> } */}
                   <li>
                     <a href="#section-1">Summary</a>
                   </li>
@@ -178,78 +191,68 @@ const ResultPage = () => {
           </div>
           <div className="col-span-8">
             <section id="section-1" className="min-h-screen">
-              <h2 className="text-3xl font-black mb-4">Flood Map {searchValue}</h2>
-              <Map center={fromLonLat(center)} zoom={zoom}>
+              <h2 className="text-3xl font-black mb-4">
+                Flood Map {selectedPlace.text}
+              </h2>
+              <Map center={fromLonLat(selectedPlace.center)} zoom={zoom}>
                 <Layers>
                   <TileLayer source={osm()} zIndex={0} />
-                  {showLayer1 && (
-                    <VectorLayer
-                      source={vector({
-                        features: new GeoJSON().readFeatures(geojsonObject, {
-                          featureProjection: get("EPSG:3857"),
+                  <VectorLayer
+                    source={vector({
+                      features: new GeoJSON().readFeatures(geojsonObject, {
+                        featureProjection: get("EPSG:3857"),
+                      }),
+                    })}
+                    style={styles.MultiPolygon}
+                  />
+                  <VectorLayer
+                    source={vector({
+                      features: [
+                        new Feature({
+                          geometry: new Point(fromLonLat(selectedPlace.center)),
                         }),
-                      })}
-                      style={styles.MultiPolygon}
-                    />
-                  )}
-                  {showLayer2 && (
-                    <VectorLayer
-                      source={vector({
-                        features: new GeoJSON().readFeatures(geojsonObject2, {
-                          featureProjection: get("EPSG:3857"),
-                        }),
-                      })}
-                      style={styles.MultiPolygon}
-                    />
-                  )}
+                      ],
+                    })}
+                    style={styles.Point}
+                  />
                 </Layers>
                 <Controls>
                   <FullScreenControl />
                   <ZoomControl />
                 </Controls>
               </Map>
-              <div>
-                <input
-                  type="checkbox"
-                  checked={showLayer1}
-                  onChange={(event) => setShowLayer1(event.target.checked)}
-                />{" "}
-                Johnson County
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  checked={showLayer2}
-                  onChange={(event) => setShowLayer2(event.target.checked)}
-                />{" "}
-                Wyandotte County
-              </div>
 
               <div className="py-6 my-6 border border-l-0 border-r-0 border-gray-200">
                 <div className="font-bold text-gray-400 text-2xl mb-4">
-                  {searchValue}
+                  {selectedPlace.text}
                 </div>
                 <span className="p-2 pl-0 border-r-2 border-gray-200">
                   Flood Risk
-                </span>{" "}
+                </span>
                 <span className="p-2">4996 properties at risk of flooding</span>
               </div>
 
               <div className="py-6">
-                <h2 className="text-3xl font-black">Flood risk in {searchValue}</h2>
+                <h2 className="text-3xl font-black">
+                  Flood risk in {selectedPlace.text}
+                </h2>
                 <p className="py-4 md:w-2/4">
-                  6.1% of the properties in {searchValue} at risk of flooding. The vast
-                  majority (4.3%) of the properties are at hight to medium
-                  flood. The Environment Agency flood map of {searchValue} are shown
-                  below.
+                  6.1% of the properties in {selectedPlace.text} at risk of
+                  flooding. The vast majority (4.3%) of the properties are at
+                  hight to medium flood. The Environment Agency flood map of{" "}
+                  {selectedPlace.text} are shown below.
                 </p>
-                <strong>Property type at risk of flooding in {searchValue}</strong>
+                <strong>
+                  Property type at risk of flooding in {selectedPlace.text}
+                </strong>
                 <div className="h-60 border my-4 bg-gray-50">Graph image</div>
                 <p className="py-4 md:w-2/4">
-                  The property type affected by risk in {searchValue} are mostly
-                  residential.
+                  The property type affected by risk in {selectedPlace.text} are
+                  mostly residential.
                 </p>
-                <strong>Property type at risk of flooding in {searchValue}</strong>
+                <strong>
+                  Property type at risk of flooding in {selectedPlace.text}
+                </strong>
                 <div className="h-60 border my-4 bg-gray-50">Graph image</div>
               </div>
             </section>

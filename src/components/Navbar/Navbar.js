@@ -11,7 +11,7 @@ export class Navbar extends Component {
       <div>
         <nav className="sticky border-b z-50 w-full nav flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest">
-            <Link to="/">
+            <Link exact to="/">
               <img
                 src={logo}
                 className="fill-current h-14 mr-2 "
@@ -47,7 +47,7 @@ export class Navbar extends Component {
 
           <ul className="menu border-b md:border-none flex justify-end list-reset m-0 w-full md:w-auto">
             <li className="border-t md:border-none">
-              <Link
+              <Link exact
                 to="/"
                 className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker active"
               >
@@ -56,12 +56,12 @@ export class Navbar extends Component {
             </li>
 
             <li className="border-t md:border-none">
-              <a
-                href="/about/"
+              <Link exact
+                to="/flood-risk-map"
                 className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker"
               >
                 Flood Risk Map
-              </a>
+              </Link>
             </li>
 
             <li className="border-t md:border-none">
