@@ -1,5 +1,6 @@
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import SearchInput from "../Searchbar/SearchInput";
 import logo from "../../images/Urban_Water_cv.png";
 
 import React, { Component } from "react";
@@ -8,7 +9,7 @@ export class Navbar extends Component {
   render() {
     return (
       <div>
-        <nav className="sticky shadow-md z-50 w-full nav flex flex-wrap items-center justify-between px-4">
+        <nav className="sticky border-b z-50 w-full nav flex flex-wrap items-center justify-between px-4">
           <div className="flex flex-no-shrink items-center mr-6 py-3 text-grey-darkest">
             <Link to="/">
               <img
@@ -22,6 +23,19 @@ export class Navbar extends Component {
               />
             </Link>
           </div>
+
+          <Switch>
+            <Route
+              path="/"
+              render={(props) =>
+                props.location.pathname !== "/" && (
+                  <div className="relative w-1/3 shadow-md rounded-md border border-color-gray-400">
+                    <SearchInput />
+                  </div>
+                )
+              }
+            />
+          </Switch>
 
           <input className="menu-btn hidden" type="checkbox" id="menu-btn" />
           <label

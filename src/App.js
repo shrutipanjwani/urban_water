@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import UwState from './context/uw/UwState'
 import "./components/FontAwesomeIcons/icon";
 // import logo from './logo.svg';
 import "./App.css";
@@ -11,14 +12,16 @@ import { root } from "postcss";
 
 const App = () => {
   return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/explore-towns/flood-risk-map-:locationForUrl" component={ResultPage} />
-      </Switch>
-      <Footer />
-    </Router>
+    <UwState>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/explore-towns/flood-risk-map-:place" component={ResultPage} />
+        </Switch>
+        <Footer />
+      </Router>
+    </UwState>
   );
 };
 

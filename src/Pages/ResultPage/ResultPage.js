@@ -1,5 +1,6 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import Scrollspy from "react-scrollspy";
+import uwContext from '../../context/uw/uwContext';
 
 // import "react-tabs/style/react-tabs.css";
 import "./ResultPage.css";
@@ -19,11 +20,12 @@ import FloodRiskSurfaceWater from "./pageSections/FloodRiskSurfaceWater";
 import FloodRiskSolutions from "./pageSections/FloodRiskSolutions";
 
 const ResultPage = () => {
+    const {placeName, searchValue} = useContext(uwContext)
   const [center, setCenter] = useState([-94.9065, 38.9884]);
   const [zoom, setZoom] = useState(9);
   const [showLayer1, setShowLayer1] = useState(true);
   const [showLayer2, setShowLayer2] = useState(true);
-  const [placeName, setPlaceName] = useState("Oxford");
+  
 
   let styles = {
     Point: new Style({
@@ -130,7 +132,7 @@ const ResultPage = () => {
             <div className="absolute w-full">
               <div className="fixed">
                 <div className="font-bold text-gray-600 text-xl mb-4 border-b-2 border-gray-200 p-2">
-                  Oxford {placeName}
+                  {searchValue}
                 </div>
                 <Scrollspy
                   className="scrollNav"
@@ -176,7 +178,7 @@ const ResultPage = () => {
           </div>
           <div className="col-span-8">
             <section id="section-1" className="min-h-screen">
-              <h2 className="text-3xl font-black mb-4">Flood Map Oxford</h2>
+              <h2 className="text-3xl font-black mb-4">Flood Map {searchValue}</h2>
               <Map center={fromLonLat(center)} zoom={zoom}>
                 <Layers>
                   <TileLayer source={osm()} zIndex={0} />
@@ -225,7 +227,7 @@ const ResultPage = () => {
 
               <div className="py-6 my-6 border border-l-0 border-r-0 border-gray-200">
                 <div className="font-bold text-gray-400 text-2xl mb-4">
-                  Oxford
+                  {searchValue}
                 </div>
                 <span className="p-2 pl-0 border-r-2 border-gray-200">
                   Flood Risk
@@ -234,20 +236,20 @@ const ResultPage = () => {
               </div>
 
               <div className="py-6">
-                <h2 className="text-3xl font-black">Flood risk in Oxford</h2>
+                <h2 className="text-3xl font-black">Flood risk in {searchValue}</h2>
                 <p className="py-4 md:w-2/4">
-                  6.1% of the properties in Oxford at risk of flooding. The vast
+                  6.1% of the properties in {searchValue} at risk of flooding. The vast
                   majority (4.3%) of the properties are at hight to medium
-                  flood. The Environment Agency flood map of Oxford are shown
+                  flood. The Environment Agency flood map of {searchValue} are shown
                   below.
                 </p>
-                <strong>Property type at risk of flooding in Oxford</strong>
+                <strong>Property type at risk of flooding in {searchValue}</strong>
                 <div className="h-60 border my-4 bg-gray-50">Graph image</div>
                 <p className="py-4 md:w-2/4">
-                  The property type affected by risk in Oxford are mostly
+                  The property type affected by risk in {searchValue} are mostly
                   residential.
                 </p>
-                <strong>Property type at risk of flooding in Oxford</strong>
+                <strong>Property type at risk of flooding in {searchValue}</strong>
                 <div className="h-60 border my-4 bg-gray-50">Graph image</div>
               </div>
             </section>
