@@ -17,13 +17,13 @@ import{IoLocationSharp} from 'react-icons/io5';
  <h3 className='h3_foot'>Flood Risk Assessments ready within 48 hrs.</h3>
 
      
-     <div class="grid grid-cols-3 justify-items-stretch">
+     <div className="grid grid-cols-3 justify-items-stretch">
   <div className="justify-self-center"> <MdCall/> +1 (344) 532-2352 </div>
   <div className="justify-self-center"><IoMail/> info@urban-water.co.uk </div>
   <div className="justify-self-center"><IoLocationSharp/> List Item #1</div>
 </div>
      
-                 <button class=" footer_btn bg-white hover:bg-green-100 text-green-400 font-semibold py-2 px-4 border border-green-400 rounded-full shadow">
+                 <button className=" footer_btn bg-white hover:bg-green-100 text-green-400 font-semibold py-2 px-4 border border-green-400 rounded-full shadow">
                  Get a free quote →
 </button>
 

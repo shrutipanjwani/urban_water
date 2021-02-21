@@ -1,18 +1,94 @@
-.scrollNav{
-    
+.scrollNav {
 }
-.scrollNav li a{
-    background-color: #fff;
-    color:#979fa9 ;
-    padding: 10px;
-    width: 100%;
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    max-width: 240px;
+.scrollNav li a {
+  background-color: #fff;
+  color: #979fa9;
+  padding: 10px;
+  width: 100%;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  max-width: 240px;
+  transition: all 0.3s ease-in-out;
+}
+.scrollNav li a:hover,
+.scrollNav li.is-current a {
+  background-color: rgb(207, 229, 255);
+  color: rgb(61, 144, 236);
+}
+.react-tabs__tab-list {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin: 0px;
+  border-bottom: 1px solid rgb(214, 214, 214);
+  white-space: nowrap;
+  width: 100%;
+  overflow-x: auto;
+}
+.react-tabs .react-tabs__tab-list .react-tabs__tab {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease-in-out 0s;
+  color: rgb(202, 202, 202);
+  margin-right: 28px;
+  box-sizing: border-box;
+  border-bottom: 3px solid white;
+  padding: 5px 0;
+}
+.react-tabs .react-tabs__tab-list .react-tabs__tab.react-tabs__tab--selected {
+  opacity: 1;
+  border-bottom: 3px solid rgb(66, 146, 235);
+  transition: all 0.3s ease-in-out 0s;
+}
+.accordion__button:before {
+  display: inline-block;
+  content: "";
+  height: 10px;
+  width: 10px;
+  margin-right: 12px;
+  border-bottom: 2px solid #ccc;
+  border-right: 2px solid #ccc;
+  transition: all 0.3s ease-in-out;
+  transform: rotate(45deg);
+  float: right;
+  margin-top: 8px;
+}
+.accordion__button[aria-expanded='true']::before {
+    transform: rotate(-135deg);
+}
+.accordion__item {
+    border-bottom: 1px solid #ddd;
+    padding: 2rem 0;
+}
+.accordion__heading {
+    font-weight: 600;
+}
+.accordion__panel[aria-hidden="true"]{
+    opacity: 0;
+    margin-top: -20px;
     transition: all 0.3s ease-in-out;
 }
-.scrollNav li a:hover,.scrollNav li.is-current a{
-    background-color: rgb(207, 229, 255);
-    color: rgb(61, 144, 236);
+.accordion__panel[aria-hidden="false"]{
+    opacity: 1;
+    margin-top: 0;
+    transition: all 0.3s ease-in-out;
+}
+.accordion__panel {
+    padding: 20px 0 0;
+    animation: fadein 0.35s ease-in-out;
+}
+
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+        margin-top: -20px;
+    }
+
+    100% {
+        opacity: 1;
+        margin-top: 0;
+    }
 }
