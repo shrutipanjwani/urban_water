@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import uwContext from "../../../context/uw/uwContext";
+import Map from "../../../components/Map";
+import { fromLonLat } from "ol/proj";
+import { Layers, TileLayer } from "../../../components/Layers";
+import { Controls, FullScreenControl, ZoomControl, } from "../../../components/Controls";
+import { osm, tilewms } from "../../../components/Source";
 
 const Depth = () => {
+  const { layerinfo, center, zoom } = useContext(uwContext);
+  const [high, setHigh] = useState(false);
+  const [medium, setMedium] = useState(false);
+  const [low, setLow] = useState(false);
+
   return (
     <div>
       <div className="grid md:grid-cols-5">
@@ -11,20 +22,37 @@ const Depth = () => {
               <div className="p-3">Lavel of risk</div>
             </div>
             <div className="col-span-4 grid grid-cols-4 bg-gray-100 items-center">
-              <div>
-                <div className="p-3">0.1%</div>
-                <div className="p-3">Very Low</div>
-              </div>
-              <div>
-                <div className="p-3">0.1%</div>
+              <div id="low-depth" onClick={(event) => {
+                document.getElementById('low-depth').className = 'selected'
+                document.getElementById('medium-depth').className = ''
+                document.getElementById('high-depth').className = ''
+                setLow(true)
+                setMedium(false)
+                setHigh(false)
+              }}>
+                <div className="p-3">Below 300</div>
                 <div className="p-3">Low</div>
               </div>
-              <div>
-                <div className="p-3">1%</div>
+              <div id="medium-depth" onClick={(event) => {
+                document.getElementById('low-depth').className = ''
+                document.getElementById('medium-depth').className = 'selected'
+                document.getElementById('high-depth').className = ''
+                setLow(false)
+                setMedium(true)
+                setHigh(false)
+              }}>
+                <div className="p-3">900mm to 300mm</div>
                 <div className="p-3">medium</div>
               </div>
-              <div>
-                <div className="p-3">3.3%</div>
+              <div id="high-depth" onClick={(event) => {
+                document.getElementById('low-depth').className = ''
+                document.getElementById('medium-depth').className = ''
+                document.getElementById('high-depth').className = 'selected'
+                setLow(false)
+                setMedium(false)
+                setHigh(true)
+              }}>
+                <div className="p-3">Over 900mm</div>
                 <div className="p-3">High</div>
               </div>
             </div>
@@ -37,6 +65,19 @@ const Depth = () => {
           </p>
         </div>
       </div>
+      <Map center={fromLonLat(center)} zoom={zoom}>
+        <Layers>
+          <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
+          {low && <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-depth-0-1-percent-annual-chance/wms", "Risk_of_Flooding_from_Surface_Water_Depth_0_1_Percent_Annual_Chance")} zIndex={1} layerName="Low: Below 300" />}
+          {medium && <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-depth-1-percent-annual-chance/wms", "Risk_of_Flooding_from_Surface_Water_Depth_1_Percent_Annual_Chance")} zIndex={2} layerName="Medium: 900mm to 300mm" />}
+          {high && <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-depth-3-3-percent-annual-chance/wms", "Risk_of_Flooding_from_Surface_Water_Depth_3_3_Percent_Annual_Chance")} zIndex={3} layerName="High: Over 900mm" />}
+          
+        </Layers>
+        <Controls>
+          <FullScreenControl />
+          <ZoomControl />
+        </Controls>
+      </Map>
     </div>
   );
 };

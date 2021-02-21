@@ -59,6 +59,7 @@ const SearchInput = () => {
         const result = {
             selectedFeature: selectedFeature
         }
+        debugger
         setPlace(result);
         history.push('/explore-towns/flood-risk-map-' + place);
     };

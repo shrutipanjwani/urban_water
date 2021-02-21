@@ -2,15 +2,15 @@ import React, { Fragment, useState, useContext, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import Scrollspy from "react-scrollspy";
 import uwContext from "../../context/uw/uwContext";
-
 // import "react-tabs/style/react-tabs.css";
 import "./ResultPage.css";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
-import GeoJSON from "ol/format/GeoJSON";
+// import GeoJSON from "ol/format/GeoJSON";
 import Feature from "ol/Feature";
 import { fromLonLat, get } from "ol/proj";
 import Point from "ol/geom/Point";
-import Tile from 'ol/layer/Tile';
+// import Tile from 'ol/layer/Tile';
+// import TileWMS from 'ol/source/TileWMS';
 import Map from "../../components/Map";
 import { Layers, TileLayer, VectorLayer } from "../../components/Layers";
 import { osm, vector, tilewms } from "../../components/Source";
@@ -23,19 +23,16 @@ import FloodRiskSurfaceWater from "./pageSections/FloodRiskSurfaceWater";
 import FloodRiskSolutions from "./pageSections/FloodRiskSolutions";
 
 const ResultPage = () => {
-  const { selectedPlace } = useContext(uwContext);
-  const [center, setCenter] = useState([-94.9065, 38.9884]);
-  const [zoom, setZoom] = useState(9);
-  const [showLayer1, setShowLayer1] = useState(true);
-  const [showLayer2, setShowLayer2] = useState(true);
+  const { selectedPlace, getLayerInfo, layerinfo, center, zoom } = useContext(uwContext);
+  const [showFloodZone1, setShowFloodZone1] = useState(false);
+  const [showFloodZone2, setShowFloodZone2] = useState(true);
+  const [showFloodZone3, setShowFloodZone3] = useState(true);
 
-  const riverWMS = new Tile({
-    source: new tilewms({
-      url: "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-reservoirs-maximum-flood-extent/wms",
-      params: { LAYERS: "risk-of-flooding-from-reservoirs-maximum-flood-extent", tiled: true },
-    }),
-    name: "Main River",
-  });
+  // useEffect(() => {
+	// 	getLayerInfo()
+	// }, []);
+
+  getLayerInfo()
 
   let styles = {
     Point: new Style({
@@ -196,15 +193,7 @@ const ResultPage = () => {
               </h2>
               <Map center={fromLonLat(selectedPlace.center)} zoom={zoom}>
                 <Layers>
-                  <TileLayer source={osm()} zIndex={0} />
-                  <VectorLayer
-                    source={vector({
-                      features: new GeoJSON().readFeatures(geojsonObject, {
-                        featureProjection: get("EPSG:3857"),
-                      }),
-                    })}
-                    style={styles.MultiPolygon}
-                  />
+                  <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
                   <VectorLayer
                     source={vector({
                       features: [
@@ -257,14 +246,9 @@ const ResultPage = () => {
               </div>
             </section>
 
-            <section
-              id="section-2"
-              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
-            >
+            <section id="section-2" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
               <div className="py-6 w-2/4 lg:mx-auto">
-                <h2 className="text-3xl font-black">
-                  Flood Risk Rivers and Sea - Planning
-                </h2>
+                <h2 className="text-3xl font-black">Flood Risk Rivers and Sea - Planning</h2>
                 <p className="py-6">
                   This map covers the flood risk from rivers and sea for
                   planning purposes. This information was produced by the
@@ -277,44 +261,26 @@ const ResultPage = () => {
                   risk assessment.
                 </p>
                 <div>
-                  <input
-                    type="checkbox"
-                    checked={showLayer1}
-                    onChange={(event) => setShowLayer1(event.target.checked)}
-                  />{" "}
-                  Johnson County
+                  <input type="checkbox" checked={showFloodZone1} onChange={(event) => setShowFloodZone1(event.target.checked)} />{" "}
+                  Flood Zone 1 - Low Risk
                 </div>
                 <div>
-                  <input
-                    type="checkbox"
-                    checked={showLayer2}
-                    onChange={(event) => setShowLayer2(event.target.checked)}
-                  />{" "}
-                  Wyandotte County
+                  <input type="checkbox" checked={showFloodZone2} onChange={(event) => setShowFloodZone2(event.target.checked)} />{" "}
+                  Flood Zone 2 - Medium Risk
+                </div>
+                <div>
+                  <input type="checkbox" checked={showFloodZone3} onChange={(event) => setShowFloodZone3(event.target.checked)} />{" "}
+                  Flood Zone 3 - High Risk
                 </div>
               </div>
               <Map center={fromLonLat(center)} zoom={zoom}>
                 <Layers>
-                  <TileLayer source={osm()} zIndex={0} />
-                  {showLayer1 && (
-                    <VectorLayer
-                      source={vector({
-                        features: new GeoJSON().readFeatures(geojsonObject, {
-                          featureProjection: get("EPSG:3857"),
-                        }),
-                      })}
-                      style={styles.MultiPolygon}
-                    />
+                  <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
+                  {showFloodZone2 && (
+                    <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-flood-zone-2/wms", "Flood_Map_for_Planning_Rivers_and_Sea_Flood_Zone_2")} zIndex={2} layerName="Flood Zone 2" />
                   )}
-                  {showLayer2 && (
-                    <VectorLayer
-                      source={vector({
-                        features: new GeoJSON().readFeatures(geojsonObject2, {
-                          featureProjection: get("EPSG:3857"),
-                        }),
-                      })}
-                      style={styles.MultiPolygon}
-                    />
+                  {showFloodZone3 && (
+                    <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-flood-zone-3/wms", "Flood_Map_for_Planning_Rivers_and_Sea_Flood_Zone_3")} zIndex={3} layerName="Flood Zone 3" />
                   )}
                 </Layers>
                 <Controls>
@@ -324,17 +290,11 @@ const ResultPage = () => {
               </Map>
             </section>
 
-            <section
-              id="section-3"
-              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
-            >
+            <section id="section-3" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
               <FloodRiskSurfaceWater />
             </section>
 
-            <section
-              id="section-4"
-              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
-            >
+            <section id="section-4" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
               <div className="py-6 w-2/4 lg:mx-auto">
                 <h2 className="text-3xl font-black">Flood Risk Reservoirs</h2>
                 <p className="py-6">
@@ -348,12 +308,19 @@ const ResultPage = () => {
                   assessment for your site.
                 </p>
               </div>
+              <Map center={fromLonLat(center)} zoom={zoom}>
+                <Layers>
+                  <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
+                  <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-reservoirs-maximum-flood-extent/wms", "Risk_of_Flooding_from_Reservoirs_Maximum_Flood_Extent")} zIndex={1} layerName="Extent" />
+                </Layers>
+                <Controls>
+                  <FullScreenControl />
+                  <ZoomControl />
+                </Controls>
+              </Map>
             </section>
 
-            <section
-              id="section-5"
-              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
-            >
+            <section id="section-5" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
               <div className="py-6 w-2/4 lg:mx-auto">
                 <h2 className="text-3xl font-black">Historic Flood Map</h2>
                 <p className="py-6">
@@ -368,12 +335,19 @@ const ResultPage = () => {
                   assessment for your site.
                 </p>
               </div>
+              <Map center={fromLonLat(center)} zoom={zoom}>
+                <Layers>
+                  <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
+                  <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/historic-flood-map/wms", "Historic_Flood_Map")} zIndex={1} layerName="Historic Flooding" />
+                </Layers>
+                <Controls>
+                  <FullScreenControl />
+                  <ZoomControl />
+                </Controls>
+              </Map>
             </section>
 
-            <section
-              id="section-6"
-              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
-            >
+            <section id="section-6" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
               <div className="py-6 w-2/4 lg:mx-auto">
                 <h2 className="text-3xl font-black">Flood warning areas</h2>
                 <p className="py-6">
@@ -383,12 +357,18 @@ const ResultPage = () => {
                   fiver or sea.
                 </p>
               </div>
+              <Map center={fromLonLat(center)} zoom={zoom}>
+                <Layers>
+                  <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
+                </Layers>
+                <Controls>
+                  <FullScreenControl />
+                  <ZoomControl />
+                </Controls>
+              </Map>
             </section>
 
-            <section
-              id="section-7"
-              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
-            >
+            <section id="section-7" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
               <FloodRiskSolutions />
             </section>
           </div>

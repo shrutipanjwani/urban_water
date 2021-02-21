@@ -1,7 +1,10 @@
 import * as olSource from "ol/source";
 
-function tilewms() {
-	return new olSource.TileWMS();
+function tilewms({url, layer}) {
+	return new olSource.TileWMS({
+		url: url,
+      	params: { LAYERS: layer, tiled: true },
+	});
 }
 
 export default tilewms;

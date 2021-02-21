@@ -1,0 +1,199 @@
+{
+    "layers":[
+        {
+            "layerName" : "Flood Zone 1",
+            "Link": "NO LINK, **the colour is white it should show as white",
+            "layer": "",
+            "Description": "Low Probability of flooding. You don't need to do a flood risk assessment if your development is smaller than one hectare and it is not affected by sources of flooding such as  for example surface water drains, surface water, groundwater"
+        },
+        {
+            "layerName" : "Flood Zone 2",
+            "Link": "https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-flood-zone-2/wms",
+            "layer":"Flood_Map_for_Planning_Rivers_and_Sea_Flood_Zone_2",
+            "Description": "Medium Probability of flooding. You must carry out a flood risk assessment for development in flood zone 2 ",
+            "Color":"#ff0000"
+        },
+        {
+            "layerName" : "Flood Zone 3",
+            "Link": "https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-flood-zone-3/wms",
+            "layer":"Flood_Map_for_Planning_Rivers_and_Sea_Flood_Zone_3",
+            "Description": "High Probability of flooding. You must carry out a flood risk assessment for development in flood zone 3 ",
+            "Color":"#00ff00"
+ 	    },
+        {
+            "layerName" : "Flood Storage Areas",
+            "Link": "https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-flood-storage-areas/wms",
+            "layer":"Flood_Map_for_Planning_Rivers_and_Sea_Flood_Storage_Areas",
+            "Description": "These areas act as a balancing reservoir, storage basin or balancing pond. If you development is within this area you need a flood risk assessment and provide flood compesation volumes"
+    	},
+        {
+            "layerName" : "Areas Benefiting from Defences",
+            "Link": "https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-areas-benefiting-from-defences/wms",
+            "layer":"Flood_Map_for_Planning_Rivers_and_Sea_Areas_Benefiting_from_Flood_Defences",
+            "Description": "It shows partial location and benefits of flood defences. You may need a flood risk assessment to understand the risk of water overtopping these defence" 
+	    },
+        {
+            "layerName" : "Spatial Flood Defences",
+            "Link": "https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-spatial-flood-defences-without-standardised-attributes/wms",
+            "layer":"Flood_Map_for_Planning_Rivers_and_Sea_Spatial_Flood_Defences_Without_Standardised_Attributes",
+            "Description": "It shows defences which have a standard of protection equal to or better than 1 in 100 (1%) for rivers and 1 in 200 (0.5%) from the sea" 
+	    },
+        {
+            "layerName" : "Historic Flooding",
+            "Link": "https://environment.data.gov.uk/spatialdata/historic-flood-map/wms",
+            "layer":"Historic_Flood_Map",
+            "Description": "It shows to the land of historic flood but it does not necessarily indicate that properties were flooded internally" 
+	    },
+        {
+            "layerName" : " Groundwater Emergence",
+            "Link": "https://environment.data.gov.uk/spatialdata/groundwater-flooding-scoping-study-data/wms",
+	        "layer":"Groundwater_Flooding_Scoping_Study_Data",
+            "Description": "It shows the Groundwater Scoping report part 1 & 2" 
+	    },
+        {
+            "layerName" : "High: greater than 1 in 30",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-extent-3-3-percent-annual-chance/wms",
+	        "layer": "Risk_of_Flooding_from_Surface_Water_Extent_3_3_Percent_Annual_Chance",
+	        "Description": "High risk means that each year this area has a chance of flooding of greater than 3.3%. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority" 
+	    },
+        {
+            "layerName" : "Medium: 1 in 30 to 1 in 100",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-extent-1-percent-annual-chance/wms",
+            "layer":"Risk_of_Flooding_from_Surface_Water_Extent_1_Percent_Annual_Chance",            
+            "Description": "Medium risk means that each year this area has a chance of flooding of between 1% and 3.3%. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority" 
+        },
+        {
+            "layerName" : "Low: 1 in 100 to 1 in 1,000",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-extent-0-1-percent-annual-chance/wms",
+	        "layer":"Risk_of_Flooding_from_Surface_Water_Extent_0_1_Percent_Annual_Chance",          
+            "Description": "Low risk means that each year this area has a chance of flooding of between 0.1% and 1%. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority" 
+	    },
+        {
+            "layerName" : "Very Low: less than 1 in 1,000",
+            "Link": "NO LINK, **the colour is white it should show as white",
+	        "layer":"", 
+            "Description": "Very low risk means that each year this area has a chance of flooding of less than 0.1%. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority" 
+	    },
+        {
+            "layerName" : "High: Over 900mm",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-depth-3-3-percent-annual-chance/wms",
+	        "layer":"Risk_of_Flooding_from_Surface_Water_Depth_3_3_Percent_Annual_Chance",
+            "Description": "High flood impact. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority" 
+	    },
+        {
+            "layerName" : "Medium: 900mm to 300mm",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-depth-1-percent-annual-chance/wms",
+	        "layer": "Risk_of_Flooding_from_Surface_Water_Depth_1_Percent_Annual_Chance",
+            "Description": "Medium flood impact. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority" 
+	    },
+        {
+            "layerName" : "Low: Below 300",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-depth-0-1-percent-annual-chance/wms",
+	        "layer":"Risk_of_Flooding_from_Surface_Water_Depth_0_1_Percent_Annual_Chance",
+            "Description": "Low flood impact. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority" 
+	    },
+        {
+            "layerName" : "More than 2.0",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-hazard-3-3-percent-annual-chance/wms",
+	        "layer":"Risk_of_Flooding_from_Surface_Water_Hazard_3_3_Percent_Annual_Chance",
+            "Description": "Danger for all including the emergency services. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority" 
+	    },
+        {
+            "layerName" : "1.25 to 2.0",
+            "Link": ": https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-hazard-1-percent-annual-chance/wms",
+	        "layer":"Risk_of_Flooding_from_Surface_Water_Hazard_1_Percent_Annual_Chance",
+            "Description": "Danger for most inlcuding general public. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority" 
+	    },
+        {
+            "layerName" : "0.75 to 1.25",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-hazard-0-1-percent-annual-chance/wms",
+	        "layer":"Risk_of_Flooding_from_Surface_Water_Hazard_0_1_Percent_Annual_Chance",
+            "Description": "Danger for some including children, the elderly and the infirm. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority" 
+	    },
+        {
+            "layerName" : "Less than 0.75",
+            "Link":  "NO LINK **the colour is white it should show as white",
+	        "layer":"",
+            "Description": "Very low hazard - Caution. It is indicative and unsuitable for identifying whether an individual property will flood unless agreed with your local Lead Local Flood Authority"
+	    },
+        {
+            "layerName" : "Speed storm greater than 1 in 30",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-speed-3-3-percent-annual-chance/wms",
+	        "layer":"Risk_of_Flooding_from_Surface_Water_Speed_3_3_Percent_Annual_Chance",
+            "Description": "Maximum speed of flood flow  that could result from a flood with a 3.3% chance of happening in any given year" 
+	    },
+        {
+            "layerName" : "Speed storm btw 1 in 30 and 1 in 100",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-speed-1-percent-annual-chance/wms",
+	        "layer":"Risk_of_Flooding_from_Surface_Water_Speed_1_Percent_Annual_Chance",
+            "Description": "Maximum speed of flood flow  that could result from a flood with a 1% to 3.3% chance of happening in any given year" 
+	    },
+        {
+            "layerName" : "Speed storm btw 1 in 100 to 1 in 1,000",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-surface-water-speed-0-1-percent-annual-chance/wms",
+	        "layer": "Risk_of_Flooding_from_Surface_Water_Speed_0_1_Percent_Annual_Chance",
+            "Description": "Maximum speed of flood flow  that could result from a flood with a 0.1% to 1% chance of happening in any given year" 
+	    },
+        {
+            "layerName" : "Extent",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-reservoirs-maximum-flood-extent/wms",
+	        "layer":"Risk_of_Flooding_from_Reservoirs_Maximum_Flood_Extent",
+            "Description": "This is the simplified version of the outline Reservoir Flood Map as shown on the Environment Agency website. It shows the largest area that might be flooded if a reservoir were to fail. Since this is a prediction of a credible worst case scenario, it’s unlikely that any actual flood would be this large. These data are intended for emergency planning only and are not reliable for large scale flood risk assessments"
+	    },
+        {
+            "layerName" : "Velocity ",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-reservoirs-maximum-flood-speed/wms",
+	        "layer":"Risk_of_Flooding_from_Reservoirs_Maximum_Flood_Speed",
+            "Description": "This is the simplified version of the outline Reservoir Flood Map as shown on the Environment Agency website. It shows the largest area that might be flooded if a reservoir were to fail. Since this is a prediction of a credible worst case scenario, it’s unlikely that any actual velocity would be this large. These data are intended for emergency planning only and are not reliable for large scale flood risk assessments" 
+	    },
+        {
+            "layerName" : "Depth",
+            "Link": "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-reservoirs-maximum-flood-depth/wms",
+	        "layer":"Risk_of_Flooding_from_Reservoirs_Maximum_Flood_Depth",
+            "Description": "This is the simplified version of the outline Reservoir Flood Map as shown on the Environment Agency website. It shows the largest area that might be flooded if a reservoir were to fail. Since this is a prediction of a credible worst case scenario, it’s unlikely that any actual flood depth would be this large. These data are intended for emergency planning only and are not reliable for large scale flood risk assessments" 
+	    },
+        {
+            "layerName" : "Critical Drainage Areas",
+            "Link": "https://environment.data.gov.uk/spatialdata/areas-with-critical-drainage-problems/wms",
+	        "layer":"Areas_with_Critical_Drainage_Problems",
+            "Description": "You will need a flood risk assessment if you development is in flood zone 1 and within a critical drainage area. This layer displays the geographical coverage of  Areas with Critical Drainage Problems (ACDPs) across England" 
+	    },
+        {
+            "layerName" : "Flood Risk Areas",
+            "Link": "https://environment.data.gov.uk/spatialdata/flood-risk-areas/wms",
+	        "layer":"Flood_Risk_Areas",
+            "Description": "Flood Risk Areas identify locations where there is believed to be significant flood risk. Flood Risk Areas have been defined by the Environment Agency (main rivers and the sea) and Lead Local Flood Authorities (surface water). Flood Risk Areas determine where Flood Hazard and Risk Maps and Flood Risk Management Plans must subsequently be produced"
+        },
+        {
+            "layerName" : "Risk areas cluster",
+            "Link": "https://environment.data.gov.uk/spatialdata/cluster-map/wms",
+	        "layer":"Cluster_Maps",
+            "Description": "Cluster Maps are aggregations of 3km by 3km squares that each contain at least 4 (in Wales) or 5 (in England) touching 'blue squares' (i.e. 1km grid squares where one of the thresholds above is exceeded)" 
+	    },
+        {
+            "layerName" : "Communities at Risk ",
+            "Link": "https://environment.data.gov.uk/spatialdata/indicative-flood-risk-areas-communities-at-risk-data/wms",
+	        "layer":"Indicative_Flood_Risk_Areas_Communities_at_Risk_Data",
+            "Description": " This information is provided by the Environment Agency for use by LLFAs in their review during 2017 of Preliminary Flood Risk Assessments and Flood Risk Areas under the Flood Risk Areas. it must be used in conjunction with data for Indicative Flood Risk Areas generated by the Environment Agency using the cluster method as well" 
+	    },
+        {
+            "layerName" : "People sensitivy Grid",
+            "Link": "https://environment.data.gov.uk/spatialdata/surface-water-flood-risk-exposure-grid-people-sensitivity-grid/wms",
+	        "layer":"Surface_Water_Flood_Risk_Exposure_Grid_People_Sensitivity_Grid",
+            "Description": "The Indicative Flood Risk Areas are primarily based on an aggregated 1km square grid Updated Flood Map for Surface Water (1 in 100 and 1000 annual probability rainfall), informally referred to as the “blue square map”" 
+	    },
+        {
+            "layerName" : "People Sensitivity by LLFA",
+            "Link": "https://environment.data.gov.uk/spatialdata/people-sensitivity-map-by-llfa/wms",
+	        "layer":"People_Sensitivity_Map_by_LLFA",
+            "Description": "The Indicative Flood Risk Areas are primarily based on an aggregated 1km square grid Updated Flood Map for Surface Water (1 in 100 and 1000 annual probability rainfall), informally referred to as the “blue square map”"
+	    },
+        {
+            "layerName" : "1km Blue Squares",
+            "Link": "https://environment.data.gov.uk/spatialdata/indicative-flood-risk-areas-1km-blue-squares/wms",
+	        "layer":"Indicative_Flood_Risk_Areas_1km_Blue_Squares",
+            "Description": "The Indicative Flood Risk Areas are primarily based on an aggregated 1km square grid Updated Flood Map for Surface Water (1 in 100 and 1000 annual probability rainfall), informally referred to as the “blue square map”" 
+        }
+    ]
+}
+    
