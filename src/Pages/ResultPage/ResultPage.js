@@ -5,12 +5,9 @@ import uwContext from "../../context/uw/uwContext";
 // import "react-tabs/style/react-tabs.css";
 import "./ResultPage.css";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
-// import GeoJSON from "ol/format/GeoJSON";
 import Feature from "ol/Feature";
 import { fromLonLat, get } from "ol/proj";
 import Point from "ol/geom/Point";
-// import Tile from 'ol/layer/Tile';
-// import TileWMS from 'ol/source/TileWMS';
 import Map from "../../components/Map";
 import { Layers, TileLayer, VectorLayer } from "../../components/Layers";
 import { osm, vector, tilewms } from "../../components/Source";
@@ -67,69 +64,6 @@ const ResultPage = () => {
     }),
   };
 
-  const geojsonObject = {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        properties: {
-          kind: "county",
-          name: "Wyandotte",
-          state: "KS",
-        },
-        geometry: {
-          type: "MultiPolygon",
-          coordinates: [
-            [
-              [
-                [-94.8627, 39.202],
-                [-94.901, 39.202],
-                [-94.9065, 38.9884],
-                [-94.8682, 39.0596],
-                [-94.6053, 39.0432],
-                [-94.6053, 39.1144],
-                [-94.5998, 39.1582],
-                [-94.7422, 39.1691],
-                [-94.7751, 39.202],
-                [-94.8627, 39.202],
-              ],
-            ],
-          ],
-        },
-      },
-    ],
-  };
-  const geojsonObject2 = {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        properties: {
-          kind: "county",
-          name: "Johnson",
-          state: "KS",
-        },
-        geometry: {
-          type: "MultiPolygon",
-          coordinates: [
-            [
-              [
-                [-94.9065, 38.9884],
-                [-95.0544, 38.9829],
-                [-95.0544, 38.7365],
-                [-94.9668, 38.7365],
-                [-94.6108, 38.7365],
-                [-94.6108, 38.846],
-                [-94.6053, 39.0432],
-                [-94.8682, 39.0596],
-                [-94.9065, 38.9884],
-              ],
-            ],
-          ],
-        },
-      },
-    ],
-  };
   return (
     <Fragment>
       <div className="lg:container mx-auto">
