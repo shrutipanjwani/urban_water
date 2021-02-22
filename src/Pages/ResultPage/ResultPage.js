@@ -25,11 +25,12 @@ const ResultPage = () => {
   const [showFloodZone2, setShowFloodZone2] = useState(true);
   const [showFloodZone3, setShowFloodZone3] = useState(true);
 
-  // useEffect(() => {
-	// 	getLayerInfo()
-	// }, []);
+  useEffect(() => {
+		getLayerInfo()
+    // eslint-disable-next-line
+	}, []);
 
-  getLayerInfo()
+  // getLayerInfo()
 
   let styles = {
     Point: new Style({

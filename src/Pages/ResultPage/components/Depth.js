@@ -21,9 +21,9 @@ const Depth = () => {
               <div className="p-3">Flooding likelihood</div>
               <div className="p-3">Lavel of risk</div>
             </div>
-            <div className="col-span-4 grid grid-cols-4 bg-gray-100 items-center">
+            <div className="col-span-4 grid grid-cols-3 bg-gray-100 items-center px-4">
               <div id="low-depth" onClick={(event) => {
-                document.getElementById('low-depth').className = 'selected'
+                document.getElementById('low-depth').className = 'selectedLavel'
                 document.getElementById('medium-depth').className = ''
                 document.getElementById('high-depth').className = ''
                 setLow(true)
@@ -35,7 +35,7 @@ const Depth = () => {
               </div>
               <div id="medium-depth" onClick={(event) => {
                 document.getElementById('low-depth').className = ''
-                document.getElementById('medium-depth').className = 'selected'
+                document.getElementById('medium-depth').className = 'selectedLavel'
                 document.getElementById('high-depth').className = ''
                 setLow(false)
                 setMedium(true)
@@ -47,7 +47,7 @@ const Depth = () => {
               <div id="high-depth" onClick={(event) => {
                 document.getElementById('low-depth').className = ''
                 document.getElementById('medium-depth').className = ''
-                document.getElementById('high-depth').className = 'selected'
+                document.getElementById('high-depth').className = 'selectedLavel'
                 setLow(false)
                 setMedium(false)
                 setHigh(true)

@@ -6,7 +6,7 @@ import axios from 'axios'
 const UwState = props => {
     const initialState = {
         selectedPlace: {},
-        layerinfo: {},
+        layerinfo: [],
         center: [-2.36966957036279, 54.2379333607472],
         zoom: 9
     }

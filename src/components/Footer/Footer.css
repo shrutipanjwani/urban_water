@@ -3,6 +3,8 @@
     background: rgb(66, 146, 235);
     color: white;
     padding: 3em;
+    position: relative;
+    z-index: 1;
 }
 .foot_img{
     margin-left: 41%;

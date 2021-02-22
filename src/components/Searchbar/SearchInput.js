@@ -34,7 +34,7 @@ const SearchInput = () => {
 
         // const inputLength = escapedValue.length;
         getFeatureSet(escapedValue);
-
+        
         featureSet.map(function(feature){
             sugs.push(feature.text)
         })
@@ -59,7 +59,6 @@ const SearchInput = () => {
         const result = {
             selectedFeature: selectedFeature
         }
-        debugger
         setPlace(result);
         history.push('/explore-towns/flood-risk-map-' + place);
     };

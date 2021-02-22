@@ -21,9 +21,9 @@ const Extent = () => {
               <div className="p-3">Flooding likelihood</div>
               <div className="p-3">Lavel of risk</div>
             </div>
-            <div className="col-span-4 grid grid-cols-4 bg-gray-100 items-center">
+            <div className="col-span-4 grid grid-cols-3 bg-gray-100 items-center px-4">
               <div id="low-extent" onClick={(event) => {
-                document.getElementById('low-extent').className = 'selected'
+                document.getElementById('low-extent').className = 'selectedLavel'
                 document.getElementById('medium-extent').className = ''
                 document.getElementById('high-extent').className = ''
                 setLow(true)
@@ -35,7 +35,7 @@ const Extent = () => {
               </div>
               <div id="medium-extent" onClick={(event) => {
                 document.getElementById('low-extent').className = ''
-                document.getElementById('medium-extent').className = 'selected'
+                document.getElementById('medium-extent').className = 'selectedLavel'
                 document.getElementById('high-extent').className = ''
                 setLow(false)
                 setMedium(true)
@@ -47,7 +47,7 @@ const Extent = () => {
               <div id="high-extent" onClick={(event) => {
                 document.getElementById('low-extent').className = ''
                 document.getElementById('medium-extent').className = ''
-                document.getElementById('high-extent').className = 'selected'
+                document.getElementById('high-extent').className = 'selectedLavel'
                 setLow(false)
                 setMedium(false)
                 setHigh(true)

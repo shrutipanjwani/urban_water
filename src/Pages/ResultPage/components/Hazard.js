@@ -21,9 +21,9 @@ const Hazard = () => {
               <div className="p-3">Flooding likelihood</div>
               <div className="p-3">Lavel of risk</div>
             </div>
-            <div className="col-span-4 grid grid-cols-4 bg-gray-100 items-center">
+            <div className="col-span-4 grid grid-cols-3 bg-gray-100 items-center px-4">
               <div id="low-hazard" onClick={(event) => {
-                document.getElementById('low-hazard').className = 'selected'
+                document.getElementById('low-hazard').className = 'selectedLavel'
                 document.getElementById('medium-hazard').className = ''
                 document.getElementById('high-hazard').className = ''
                 setLow(true)
@@ -35,7 +35,7 @@ const Hazard = () => {
               </div>
               <div id="medium-hazard" onClick={(event) => {
                 document.getElementById('low-hazard').className = ''
-                document.getElementById('medium-hazard').className = 'selected'
+                document.getElementById('medium-hazard').className = 'selectedLavel'
                 document.getElementById('high-hazard').className = ''
                 setLow(false)
                 setMedium(true)
@@ -47,7 +47,7 @@ const Hazard = () => {
               <div id="high-hazard" onClick={(event) => {
                 document.getElementById('low-hazard').className = ''
                 document.getElementById('medium-hazard').className = ''
-                document.getElementById('high-hazard').className = 'selected'
+                document.getElementById('high-hazard').className = 'selectedLavel'
                 setLow(false)
                 setMedium(false)
                 setHigh(true)
