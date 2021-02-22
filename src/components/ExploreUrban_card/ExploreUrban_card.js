@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./ExploreUrban_card.css";
-
+import "./NewCity.js";
+import {BrowserRouter as Router, Route, Link, NavLink, Switch} from "react-router-dom";
 export class ExploreUrban_card extends Component {
   render() {
     const cardInfo2 = [
@@ -69,7 +70,13 @@ export class ExploreUrban_card extends Component {
 
           Explore Urban flood risk
         </h2>
-        <div className="grid grid-cols-3 gap-8 m-12 ">{cardInfo2.map(renderCard)}</div>
+        <div className="grid grid-cols-3 gap-8 m-12">{cardInfo2.map(renderCard)}</div>
+       
+            <Link className="fire_btn" to="/new-city"> Explore New City</Link>
+            <div>
+             <br/>
+            </div>
+
       </div>
     );
   }

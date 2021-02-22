@@ -9,6 +9,8 @@ import Footer from "./components/Footer/Footer";
 import ResultPage from "./Pages/ResultPage/ResultPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import { root } from "postcss";
+import NewService from "./components/OurServices_card/NewService";
+import NewCity from "./components/ExploreUrban_card/NewCity";
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path={["/explore-towns/flood-risk-map-:place", "/flood-risk-map"]} component={ResultPage} />
+          <Route exact path="/new-service" component={NewService} />
+        <Route exact path="/new-city" component={NewCity} />
         </Switch>
         <Footer />
       </Router>

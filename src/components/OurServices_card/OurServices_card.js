@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./OurServices_card.css";
-
+import "./NewService.js";
+import {BrowserRouter as Router, Route, Link, NavLink, Switch} from "react-router-dom";
 export class OurServices_card extends Component {
   render() {
     const cardInfo = [
@@ -61,6 +62,8 @@ export class OurServices_card extends Component {
           We can help your project from planning approval to construction
         </p>
         <div className="grid grid-cols-3 gap-8 m-12">{cardInfo.map(renderCard)}</div>
+        <Link className='fire_btn'to="/new-service"> Add New Service</Link>
+       
       </div>
     );
   }
