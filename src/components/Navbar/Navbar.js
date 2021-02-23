@@ -2,11 +2,15 @@ import "./Navbar.css";
 import { Link, BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SearchInput from "../Searchbar/SearchInput";
 import logo from "../../images/Urban_Water_cv.png";
+import uwContext from "../../context/uw/uwContext";
 
-import React, { Component } from "react";
+import React, {useContext} from "react";
 
-export class Navbar extends Component {
-  render() {
+const Navbar = () => {
+  const { frmPage, setFrmPage } = useContext(
+    uwContext
+  );
+  
     return (
       <div>
         <nav className="sticky border-b z-50 w-full nav flex flex-wrap items-center justify-between px-4">
@@ -55,7 +59,9 @@ export class Navbar extends Component {
               </Link>
             </li>
 
-            <li className="border-t md:border-none">
+            <li className="border-t md:border-none" onClick={ (event) => {
+              setFrmPage(true)
+              }}>
               <Link exact
                 to="/flood-risk-map"
                 className="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker"
@@ -94,7 +100,6 @@ export class Navbar extends Component {
         </nav>
       </div>
     );
-  }
 }
 
 export default Navbar;

@@ -10,7 +10,7 @@ import { fromLonLat, get } from "ol/proj";
 import Point from "ol/geom/Point";
 import Map from "../../components/Map";
 import { Layers, TileLayer, VectorLayer } from "../../components/Layers";
-import { osm, vector, tilewms } from "../../components/Source";
+import { osm, vector, tilewms, xyz } from "../../components/Source";
 import {
   Controls,
   FullScreenControl,
@@ -20,15 +20,22 @@ import FloodRiskSurfaceWater from "./pageSections/FloodRiskSurfaceWater";
 import FloodRiskSolutions from "./pageSections/FloodRiskSolutions";
 
 const ResultPage = () => {
-  const { selectedPlace, getLayerInfo, layerinfo, center, zoom } = useContext(uwContext);
+  const {
+    selectedPlace,
+    getLayerInfo,
+    layerinfo,
+    center,
+    zoom,
+    frmPage,
+  } = useContext(uwContext);
   const [showFloodZone1, setShowFloodZone1] = useState(false);
   const [showFloodZone2, setShowFloodZone2] = useState(true);
   const [showFloodZone3, setShowFloodZone3] = useState(true);
 
   useEffect(() => {
-		getLayerInfo()
+    getLayerInfo();
     // eslint-disable-next-line
-	}, []);
+  }, []);
 
   // getLayerInfo()
 
@@ -75,9 +82,26 @@ const ResultPage = () => {
           <div className="col-span-2 mr-2 relative">
             <div className="absolute w-full">
               <div className="fixed">
-                <div className="font-bold text-gray-600 text-xl mb-4 border-b-2 border-gray-200 p-2">
-                  {selectedPlace.text}
-                </div>
+                {/* <Route
+                  path={match.url + "/:id"}
+                  render={(props) => (
+                    <UsersDetails
+                      user={
+                        users.filter(
+                          (user) =>
+                            user.id === parseInt(props.match.params.id, 10)
+                        )[0]
+                      }
+                      match={match}
+                    />
+                  )}
+                /> */}
+                {!frmPage && (
+                  <div className="font-bold text-gray-600 text-xl mb-4 border-b-2 border-gray-200 p-2">
+                    {selectedPlace.text}
+                  </div>
+                )}
+
                 <Scrollspy
                   className="scrollNav"
                   offset={-115}
@@ -92,10 +116,11 @@ const ResultPage = () => {
                   ]}
                   currentClassName="is-current"
                 >
-                  {/* { location.pathname.match('/flood-risk-map') ? '' : <li><a href="#section-1">Summary</a></li> } */}
-                  <li>
-                    <a href="#section-1">Summary</a>
-                  </li>
+                  {!frmPage && (
+                    <li>
+                      <a href="#section-1">Summary</a>
+                    </li>
+                  )}
                   <li>
                     <a href="#section-2">Flood Risk Rivers and Sea</a>
                   </li>
@@ -122,68 +147,96 @@ const ResultPage = () => {
             </div>
           </div>
           <div className="col-span-8">
-            <section id="section-1" className="min-h-screen">
-              <h2 className="text-3xl font-black mb-4">
-                Flood Map {selectedPlace.text}
-              </h2>
-              <Map center={fromLonLat(selectedPlace.center)} zoom={zoom}>
-                <Layers>
-                  <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
-                  <VectorLayer
-                    source={vector({
-                      features: [
-                        new Feature({
-                          geometry: new Point(fromLonLat(selectedPlace.center)),
-                        }),
-                      ],
-                    })}
-                    style={styles.Point}
-                  />
-                </Layers>
-                <Controls>
-                  <FullScreenControl />
-                  <ZoomControl />
-                </Controls>
-              </Map>
-
-              <div className="py-6 my-6 border border-l-0 border-r-0 border-gray-200">
-                <div className="font-bold text-gray-400 text-2xl mb-4">
-                  {selectedPlace.text}
-                </div>
-                <span className="p-2 pl-0 border-r-2 border-gray-200">
-                  Flood Risk
-                </span>
-                <span className="p-2">4996 properties at risk of flooding</span>
-              </div>
-
-              <div className="py-6">
-                <h2 className="text-3xl font-black">
-                  Flood risk in {selectedPlace.text}
+            {!frmPage && (
+              <section
+                id="section-1"
+                className="min-h-screen border-b border-gray-200 pb-6"
+              >
+                <h2 className="text-3xl font-black mb-4">
+                  Flood Map {selectedPlace.text}
                 </h2>
-                <p className="py-4 md:w-2/4">
-                  6.1% of the properties in {selectedPlace.text} at risk of
-                  flooding. The vast majority (4.3%) of the properties are at
-                  hight to medium flood. The Environment Agency flood map of{" "}
-                  {selectedPlace.text} are shown below.
-                </p>
-                <strong>
-                  Property type at risk of flooding in {selectedPlace.text}
-                </strong>
-                <div className="h-60 border my-4 bg-gray-50">Graph image</div>
-                <p className="py-4 md:w-2/4">
-                  The property type affected by risk in {selectedPlace.text} are
-                  mostly residential.
-                </p>
-                <strong>
-                  Property type at risk of flooding in {selectedPlace.text}
-                </strong>
-                <div className="h-60 border my-4 bg-gray-50">Graph image</div>
-              </div>
-            </section>
+                <Map
+                  projection="EPSG:27700"
+                  center={fromLonLat(selectedPlace.center)}
+                  zoom={zoom}
+                >
+                  <Layers>
+                    <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
+                    {/* <TileLayer source={xyz(
+                  "https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXJnZXJpdiIsImEiOiJjazludXBxcGowMmc1M2ZuNndweXh6bXl5In0.6NJz4WYp0542hCoBwWHx6g",
+                  'Developed by <a  target="_blank" href="http://www.themapsociety.com">TheMapSociety</a>',
+                  18
+                )} zIndex={0} layerName="Basemap" /> */}
+                    <TileLayer
+                      source={tilewms(
+                        "https://environment.data.gov.uk/spatialdata/statutory-main-river-map/wms",
+                        "Statutory_Main_River_Map"
+                      )}
+                      zIndex={1}
+                      layerName="Main River"
+                    />
+                    <VectorLayer
+                      source={vector({
+                        features: [
+                          new Feature({
+                            geometry: new Point(
+                              fromLonLat(selectedPlace.center)
+                            ),
+                          }),
+                        ],
+                      })}
+                      style={styles.Point}
+                    />
+                  </Layers>
+                  <Controls>
+                    <FullScreenControl />
+                    <ZoomControl />
+                  </Controls>
+                </Map>
 
-            <section id="section-2" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
-              <div className="py-6 w-2/4 lg:mx-auto">
-                <h2 className="text-3xl font-black">Flood Risk Rivers and Sea - Planning</h2>
+                <div className="py-6 my-6 border border-l-0 border-r-0 border-gray-200">
+                  <div className="font-bold text-gray-400 text-2xl mb-4">
+                    {selectedPlace.text}
+                  </div>
+                  <span className="p-2 pl-0 border-r-2 border-gray-200">
+                    Flood Risk
+                  </span>
+                  <span className="p-2">
+                    4996 properties at risk of flooding
+                  </span>
+                </div>
+
+                <div className="py-6">
+                  <h2 className="text-3xl font-black">
+                    Flood risk in {selectedPlace.text}
+                  </h2>
+                  <p className="py-4 md:w-2/4">
+                    6.1% of the properties in {selectedPlace.text} at risk of
+                    flooding. The vast majority (4.3%) of the properties are at
+                    hight to medium flood. The Environment Agency flood map of{" "}
+                    {selectedPlace.text} are shown below.
+                  </p>
+                  <strong>
+                    Property type at risk of flooding in {selectedPlace.text}
+                  </strong>
+                  <div className="h-60 border my-4 bg-gray-50">Graph image</div>
+                  <p className="py-4 md:w-2/4">
+                    The property type affected by risk in {selectedPlace.text}{" "}
+                    are mostly residential.
+                  </p>
+                  <strong>
+                    Property type at risk of flooding in {selectedPlace.text}
+                  </strong>
+                  <div className="h-60 border my-4 bg-gray-50">Graph image</div>
+                </div>
+              </section>
+            )}
+
+            <section id="section-2" className="min-h-screen mb-6 pb-6">
+              <div className="pb-6 w-2/4 lg:mx-auto">
+                <h2 className="text-3xl font-black">
+                  Flood Risk Rivers and Sea - Planning
+                </h2>
                 <p className="py-6">
                   This map covers the flood risk from rivers and sea for
                   planning purposes. This information was produced by the
@@ -196,26 +249,62 @@ const ResultPage = () => {
                   risk assessment.
                 </p>
                 <div>
-                  <input type="checkbox" checked={showFloodZone1} onChange={(event) => setShowFloodZone1(event.target.checked)} />{" "}
+                  <input
+                    type="checkbox"
+                    checked={showFloodZone1}
+                    onChange={(event) =>
+                      setShowFloodZone1(event.target.checked)
+                    }
+                  />{" "}
                   Flood Zone 1 - Low Risk
                 </div>
                 <div>
-                  <input type="checkbox" checked={showFloodZone2} onChange={(event) => setShowFloodZone2(event.target.checked)} />{" "}
+                  <input
+                    type="checkbox"
+                    checked={showFloodZone2}
+                    onChange={(event) =>
+                      setShowFloodZone2(event.target.checked)
+                    }
+                  />{" "}
                   Flood Zone 2 - Medium Risk
                 </div>
                 <div>
-                  <input type="checkbox" checked={showFloodZone3} onChange={(event) => setShowFloodZone3(event.target.checked)} />{" "}
+                  <input
+                    type="checkbox"
+                    checked={showFloodZone3}
+                    onChange={(event) =>
+                      setShowFloodZone3(event.target.checked)
+                    }
+                  />{" "}
                   Flood Zone 3 - High Risk
                 </div>
               </div>
-              <Map center={fromLonLat(center)} zoom={zoom}>
+              <Map
+                projection="EPSG:3857"
+                center={fromLonLat(center)}
+                zoom={zoom}
+              >
                 <Layers>
                   <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
                   {showFloodZone2 && (
-                    <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-flood-zone-2/wms", "Flood_Map_for_Planning_Rivers_and_Sea_Flood_Zone_2")} zIndex={2} layerName="Flood Zone 2" />
+                    <TileLayer
+                      source={tilewms(
+                        "https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-flood-zone-2/wms",
+                        "Flood_Map_for_Planning_Rivers_and_Sea_Flood_Zone_2"
+                      )}
+                      zIndex={2}
+                      layerName="Flood Zone 2"
+                    />
                   )}
                   {showFloodZone3 && (
-                    <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-flood-zone-3/wms", "Flood_Map_for_Planning_Rivers_and_Sea_Flood_Zone_3")} zIndex={3} layerName="Flood Zone 3" />
+                    <TileLayer
+                      source={tilewms(
+                        "https://environment.data.gov.uk/spatialdata/flood-map-for-planning-rivers-and-sea-flood-zone-3/wms",
+                        "Flood_Map_for_Planning_Rivers_and_Sea_Flood_Zone_3"
+                      )}
+                      zIndex={3}
+                      layerName="Flood Zone 3"
+                    />
                   )}
                 </Layers>
                 <Controls>
@@ -225,11 +314,17 @@ const ResultPage = () => {
               </Map>
             </section>
 
-            <section id="section-3" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
+            <section
+              id="section-3"
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
               <FloodRiskSurfaceWater />
             </section>
 
-            <section id="section-4" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
+            <section
+              id="section-4"
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
               <div className="py-6 w-2/4 lg:mx-auto">
                 <h2 className="text-3xl font-black">Flood Risk Reservoirs</h2>
                 <p className="py-6">
@@ -243,10 +338,21 @@ const ResultPage = () => {
                   assessment for your site.
                 </p>
               </div>
-              <Map center={fromLonLat(center)} zoom={zoom}>
+              <Map
+                projection="EPSG:3857"
+                center={fromLonLat(center)}
+                zoom={zoom}
+              >
                 <Layers>
                   <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
-                  <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-reservoirs-maximum-flood-extent/wms", "Risk_of_Flooding_from_Reservoirs_Maximum_Flood_Extent")} zIndex={1} layerName="Extent" />
+                  <TileLayer
+                    source={tilewms(
+                      "https://environment.data.gov.uk/spatialdata/risk-of-flooding-from-reservoirs-maximum-flood-extent/wms",
+                      "Risk_of_Flooding_from_Reservoirs_Maximum_Flood_Extent"
+                    )}
+                    zIndex={1}
+                    layerName="Extent"
+                  />
                 </Layers>
                 <Controls>
                   <FullScreenControl />
@@ -255,7 +361,10 @@ const ResultPage = () => {
               </Map>
             </section>
 
-            <section id="section-5" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
+            <section
+              id="section-5"
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
               <div className="py-6 w-2/4 lg:mx-auto">
                 <h2 className="text-3xl font-black">Historic Flood Map</h2>
                 <p className="py-6">
@@ -270,10 +379,21 @@ const ResultPage = () => {
                   assessment for your site.
                 </p>
               </div>
-              <Map center={fromLonLat(center)} zoom={zoom}>
+              <Map
+                projection="EPSG:3857"
+                center={fromLonLat(center)}
+                zoom={zoom}
+              >
                 <Layers>
                   <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
-                  <TileLayer source={tilewms("https://environment.data.gov.uk/spatialdata/historic-flood-map/wms", "Historic_Flood_Map")} zIndex={1} layerName="Historic Flooding" />
+                  <TileLayer
+                    source={tilewms(
+                      "https://environment.data.gov.uk/spatialdata/historic-flood-map/wms",
+                      "Historic_Flood_Map"
+                    )}
+                    zIndex={1}
+                    layerName="Historic Flooding"
+                  />
                 </Layers>
                 <Controls>
                   <FullScreenControl />
@@ -282,7 +402,10 @@ const ResultPage = () => {
               </Map>
             </section>
 
-            <section id="section-6" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
+            <section
+              id="section-6"
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
               <div className="py-6 w-2/4 lg:mx-auto">
                 <h2 className="text-3xl font-black">Flood warning areas</h2>
                 <p className="py-6">
@@ -292,7 +415,11 @@ const ResultPage = () => {
                   fiver or sea.
                 </p>
               </div>
-              <Map center={fromLonLat(center)} zoom={zoom}>
+              <Map
+                projection="EPSG:3857"
+                center={fromLonLat(center)}
+                zoom={zoom}
+              >
                 <Layers>
                   <TileLayer source={osm()} zIndex={0} layerName="Basemap" />
                 </Layers>
@@ -303,7 +430,10 @@ const ResultPage = () => {
               </Map>
             </section>
 
-            <section id="section-7" className="min-h-screen border-t-2 border-gray-200 my-6 py-6">
+            <section
+              id="section-7"
+              className="min-h-screen border-t-2 border-gray-200 my-6 py-6"
+            >
               <FloodRiskSolutions />
             </section>
           </div>

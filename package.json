@@ -14,6 +14,7 @@
     "axios": "^0.21.1",
     "ol": "^6.5.0",
     "postcss": "^7.0.35",
+    "proj4": "^2.7.0",
     "react": "^17.0.1",
     "react-accessible-accordion": "^3.3.4",
     "react-autosuggest": "^10.1.0",
