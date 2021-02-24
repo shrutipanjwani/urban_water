@@ -35,9 +35,9 @@ const SearchInput = () => {
         // const inputLength = escapedValue.length;
         getFeatureSet(escapedValue);
         
-        featureSet.map(function(feature){
+        featureSet.map(function (feature) {
             sugs.push(feature.text)
-        })
+        });
         return sugs;
     };
 
